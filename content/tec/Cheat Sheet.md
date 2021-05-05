@@ -32,7 +32,7 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 
 - `mvn clean package`
 - `mvn clean deploy`
-
+- `mvn dependency:tree`
 
 
 # Linux
@@ -121,7 +121,7 @@ On macOS, use the `command`as `ctrl`and the`option`as `alt`.
 | ctrl + space
  | intellisense |  |
 | ctrl + [ | 操作记录中的前一个光标位置 |  |
-| crtl + ] | 操作记录中的后一个光标位置 |  |
+| ctrl + ] | 操作记录中的后一个光标位置 |  |
 | ctrl + ⬅️ | 光标到前一个单词 | 再增加shift键实现选中功能。macOS平台默认为 `option+left`，需要通过改键映射 |
 | ctrl + ➡️ | 光标到后一个单词 | 同上 |
 | ctrl + delete | 删除前一个单词 | macOS平台默认为 `option+delete` ，需要通过改键映射 |

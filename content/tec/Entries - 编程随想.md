@@ -422,7 +422,7 @@ try {
     t1.get(5, TimeUnit.SECONDS);
     t2.get(5, TimeUnit.SECONDS);
 } catch (Exception e){
-    LOGGER.error("Completable futures execution is error.", e);
+    LOGGER.error("error when exec completable futures.", e);
     throw new ApiException(CommonException.INVOKE_FAILED);
 }
 ```
