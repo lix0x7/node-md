@@ -4,8 +4,8 @@
    - 困难，需要两个或多个算法或数据结构组合优化时间、空间复杂度的题目
 - 做题时可以先想出暴力解的思路，然后观察复杂度开销在哪里，当前题目是否有特性可以避开这个开销，再考虑如何优化。
 
-例如处理「链表排序」，我们知道排序算法有快排，时间复杂度为 `O(N*lgN)` ，但是因为链表查找效率为 `O(N)` ，所以该算法用于链表排序的复杂度变为 `O(N^2)` ，此时我们可以引入一个 `Map` 避免链表查找效率的开销，但这样引入了一个 `O(N)` 的空间复杂度开销。
-换一个角度，是否有有不需要索引访问，而使用顺序访问的 `O(N*lgN)` 排序算法呢？答案就只有归并排序了，但是它也引入了一个 `O(N)` 的空间复杂度。
+  例如处理「链表排序」，我们知道排序算法有快排，时间复杂度为 `O(N*lgN)` ，但是因为链表查找效率为 `O(N)` ，所以该算法用于链表排序的复杂度变为 `O(N^2)` ，此时我们可以引入一个 `Map` 避免链表查找效率的开销，但这样引入了一个 `O(N)` 的空间复杂度开销。
+换一个角度，是否有有不需要索引访问，而使用顺序访问的 `O(N*lgN)` 排序算法呢？答案就只有归并排序了，但是它也引入了一个 `O(N)` 的空间复杂度。
 
 - 当使用到字符串子串的时候，可以不使用s.slice去真的获取子串，可以使用left、right标记子串的左右位置，节约空间与时间。
 - BST的中序遍历就是有序输出
@@ -14,8 +14,8 @@
    - 堆未满：追加数据到堆尾，然后上浮到合适位置
    - 堆满时：当待插入元素大于当前堆顶元素时，使用当前元素替换堆顶数据，然后下沉堆顶元素到合适位置
    - 对于堆排序问题，堆是无限大的，所以永远当做堆未满处理即可
-- TopK用堆 `O(NlgK)` ； `the k-th` 用快排思想 `O(lgN)` 
-- 可以用排序解题，而且允许额外空间的情况下，记得桶排序的 `O(N)` 复杂度，例如：[https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/)
+- TopK用堆 `O(NlgK)` ； `the k-th` 用快排思想 `O(lgN)` 
+- 可以用排序解题，而且允许额外空间的情况下，记得桶排序的 `O(N)` 复杂度，例如：[https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/)
 
 
 
