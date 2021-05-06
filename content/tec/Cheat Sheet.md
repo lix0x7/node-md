@@ -1,8 +1,8 @@
 # docker
 - `docker inspect <container-name>`
 - `docker pull`
-- `docker ps`
-
+- `docker ps -a`
+- `docker run -it <img>`: 交互式运行镜像
 
 
 # k8s
@@ -90,6 +90,12 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 - `redis-cli -h host -p port -a password -n database`
 - `ttl`
 
+
+# Mongo CLI
+
+- `mongo 127.0.0.1:12345/db -u <username> -p <password>`
+- `use <db>`
+- `db.collection.find({})`
 
 
 # keymaps
