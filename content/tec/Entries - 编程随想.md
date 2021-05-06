@@ -51,7 +51,7 @@ console.log 就是一个典型的同步函数，同步 IO 输出是极大地影�
 之所以“在某些时候的限定”，是因为“约定大于配置”本身是隐晦的，约定只适用于自己绝对熟悉的某些领域，里如果设计模式、时间单位、工具类，而不适合合作类项目。Springboot 强调约定大于配置，但其很多约定初学者无从得知，由此产生很多困惑。
 
 
-Python Zen 中的一条提到 `Explicit is better than implicit` 。所以说，绝大多数情况下，程序还是应直观简洁。
+Python Zen 中的一条提到 `Explicit is better than implicit` 。所以说，绝大多数情况下，程序还是应直观简洁。
 
 
 # 动态语言中的类
@@ -62,11 +62,11 @@ Python Zen 中的一条提到 `Explicit is better than implicit` 。所以说
 类成员变量的类型应始终使用包装类型而非原始类型，使用原生类而非原始类型。这样可以明确地区分无值（null）和 0 值。尤其是使用 mybatis 这类 ORM 工具进行动态更新时，可以明确知道哪些字段有值需要更新，而哪些字段没有值不需要更新。
 
 
-# 表主键使用 `表名+id` 
-例如，project 表使用 `project_id` 作为主键，而非直接使用 `id` ，这样更清晰。相关讨论见 [StackOverFlow - Is it better to name the primary key column id or *_id?](https://stackoverflow.com/questions/6469730/is-it-better-to-name-the-primary-key-column-id-or-id)
+# 表主键使用 `表名+id` 
+例如，project 表使用 `project_id` 作为主键，而非直接使用 `id` ，这样更清晰。相关讨论见 [StackOverFlow - Is it better to name the primary key column id or *_id?](https://stackoverflow.com/questions/6469730/is-it-better-to-name-the-primary-key-column-id-or-id)
 _
 # 程序的本质
-当然， `程序=数据结构+算法` ，但这个问题是从另外一个角度看问题，我认为 `程序=输入+处理+输出` ，尤其是对于web服务，也就是接收用户输入和数据库数据数据，处理后给用户输出。所以我们编程也应该从这三个基本元素去建模。通常情况下，数据库的读取和写入是在一起的，所以按照ddd的要求，我们将其都是现在repository里，而数据处理的部分使用独立的面向对象编程方法实现。如果数据的读取和写入在不同的位置（例如从MQ读入，写入到DB；从缓存/DB分级读入），也可以该逻辑实现在repository中。repository正如其名，就是一个数据仓库，我们的程序从里面拿出来东西，再把需要持久化的东西放进去存起来，至于如何实现repository，业务逻辑并不关心。
+当然， `程序=数据结构+算法` ，但这个问题是从另外一个角度看问题，我认为 `程序=输入+处理+输出` ，尤其是对于web服务，也就是接收用户输入和数据库数据数据，处理后给用户输出。所以我们编程也应该从这三个基本元素去建模。通常情况下，数据库的读取和写入是在一起的，所以按照ddd的要求，我们将其都是现在repository里，而数据处理的部分使用独立的面向对象编程方法实现。如果数据的读取和写入在不同的位置（例如从MQ读入，写入到DB；从缓存/DB分级读入），也可以该逻辑实现在repository中。repository正如其名，就是一个数据仓库，我们的程序从里面拿出来东西，再把需要持久化的东西放进去存起来，至于如何实现repository，业务逻辑并不关心。
 
 
 # 最好的语言是 Shell 和 C
@@ -109,7 +109,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
 ### CPU
 同步：
 
-- X86 CPU从MEM获取数据 `movl 8(%ebp), %edx` 这一指令，是同步等待内存地址位置的数据进入edx寄存器。该指令完成后，数据一定在edx寄存器中，所以是「同步」的；对于CPU流水线来说，因为流水线不能在这期间处理其他事务，所以此时是「阻塞」的。
+- X86 CPU从MEM获取数据 `movl 8(%ebp), %edx` 这一指令，是同步等待内存地址位置的数据进入edx寄存器。该指令完成后，数据一定在edx寄存器中，所以是「同步」的；对于CPU流水线来说，因为流水线不能在这期间处理其他事务，所以此时是「阻塞」的。
 - CPU轮询（poll）网卡中的数据，检查是否有数据。如果网卡有数据，返回数据字节数；如果没有，返回0。这个过程中，CPU在一次询问结束后总能拿到这个字节数结果，所以是「同步」的。
 
 异步：
@@ -157,7 +157,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
          1. updateBy
          1. createTime - 毫秒级时间戳
          1. updateTime - 毫秒级时间戳
-         1. __Date - 整型日期，例如 `20200101` 
+         1. __Date - 整型日期，例如 `20200101` 
 2. RESTful API 规范与习惯
 2. Project Layout / Readme Template
 2. 微服务构建
@@ -234,7 +234,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
 - 接口信息
    - 服务地址
    - 通用请求信息
-      - `content-type` : `application/json` 
+      - `content-type` : `application/json` 
       - sample
    - 通用返回信息
       - sample
@@ -242,15 +242,15 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
    - 实体
    - API
       - 获取列表API
-         - path: `POST` `/sample/list` 
+         - path: `POST` `/sample/list` 
          - 请求参数
             - pageSize:   `Integer` 参数 1 的说明
          - 返回结构
             - status
             - msg
             - data
-               - list[]: `string[]` 列表
-                  - data: `string` 列表项信息
+               - list[]: `string[]` 列表
+                  - data: `string` 列表项信息
 
 
 
@@ -275,7 +275,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
 如果大语境下已经包含了其中某些字段，则**务必**要省略这些部分，避免冗余。
 
 
-不同系统间的核心命名尽可能保持一致，例如包含了前后端服务的单体 Git 仓库名为 `blog` ，则前后端服务在 K8s workloads 命名分别为 `fe-blog` / `server-blog` ，后台服务日志主题命名为 `server-blog` ，这样可以避免不同系统间不一致的命名引发记忆负担。 
+不同系统间的核心命名尽可能保持一致，例如包含了前后端服务的单体 Git 仓库名为 `blog` ，则前后端服务在 K8s workloads 命名分别为 `fe-blog` / `server-blog` ，后台服务日志主题命名为 `server-blog` ，这样可以避免不同系统间不一致的命名引发记忆负担。 
 
 
 与此保持一致的命名还应有开发阶段涉及到各个方面，例如浏览器收藏夹、密码管理工具文件夹、文件系统文件夹。
@@ -292,7 +292,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
   │
   └─⫸ Commit Type: build|ci|doc|feat|fix|perf|refactor|test|...
 ```
-其中 `type` 包含但不仅限于下：
+其中 `type` 包含但不仅限于下：
 
 - **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
 - **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
@@ -331,7 +331,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
 
 
 # 尽可能缩小上下文
-大型项目编写业务逻辑困难，代码散乱的一大原因在于口口相传，一旦传授的“知识”有丢失，那么后来的程序员很容易另起炉灶，把已有的逻辑又实现了一遍。最典型的情况就是枚举量都堆在一个叫 `constant` 的文件里。实际上，枚举量是最和领域对象强相关的常量，他们应当和领域对象绑定在一起，从代码实现的角度来看，他们应当是领域对象类的静态成员常量。
+大型项目编写业务逻辑困难，代码散乱的一大原因在于口口相传，一旦传授的“知识”有丢失，那么后来的程序员很容易另起炉灶，把已有的逻辑又实现了一遍。最典型的情况就是枚举量都堆在一个叫 `constant` 的文件里。实际上，枚举量是最和领域对象强相关的常量，他们应当和领域对象绑定在一起，从代码实现的角度来看，他们应当是领域对象类的静态成员常量。
 
 
 传统的三层架构把业务员逻辑写在service，把常量写在统一的constant里，把模型schema写在model下，这就导致了一种现象：明明聚合的业务概念，被打散到三个不同的文件中。
@@ -341,7 +341,7 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
 
 
 ## 上下文零散的一个例子
-我们想要编写一个project的CRUD，它有一些需要判断的逻辑，例如： `项目状态` 为 `正常` 的时候才可以修改，我们很容易写出这样的代码：
+我们想要编写一个project的CRUD，它有一些需要判断的逻辑，例如： `项目状态` 为 `正常` 的时候才可以修改，我们很容易写出这样的代码：
 ```javascript
 // constant.js
 const PROJECT_STATUS = {NORMAL: 0, BANNED: 1, DELETED: 2}	// 项目状态标记
@@ -385,7 +385,7 @@ class Project{
 ```
 
 
-其实这也就是 OO 所强调的封装，但是在事务脚本大行其道的时代，似乎都被抛弃了。最明显的地方在于，将 `NORMAL` 这个概念封装，如果未来我们需要扩展一个“试用”的状态，这个状态仍然是正常的，但属于另外一个状态了。我们只需要修改 `isNormal` 方法。但对于事务脚本，我们需要注意修改所有使用了类似的语义地方。
+其实这也就是 OO 所强调的封装，但是在事务脚本大行其道的时代，似乎都被抛弃了。最明显的地方在于，将 `NORMAL` 这个概念封装，如果未来我们需要扩展一个“试用”的状态，这个状态仍然是正常的，但属于另外一个状态了。我们只需要修改 `isNormal` 方法。但对于事务脚本，我们需要注意修改所有使用了类似的语义地方。
 
 
 # 日志规范
@@ -401,7 +401,7 @@ class Project{
 - 对于异常，一定要打印完整堆栈信息，如果需要包装异常，一定要打印log原始的错误
 - 配置加载前后一定要打印日志
 - 定时任务执行前后一定要打印日志
-- 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, rsp: {}, cost: [ 123ms ]` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response` 
+- 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, rsp: {}, cost: [ 123ms ]` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response` 
 - access日志维持特定格式，方便后期解析分析与统计。例如：统计近七天访问下游某服务的平均耗时与超时比例
 - 预留 API 动态调整日志级别
 - 对于Java框架中的日志，记得补充线程池调用缺少的MDC信息，例如：
@@ -439,7 +439,7 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
       - **Biz：核心业务逻辑，仅由Service调用**
    - **[ Repo ]：可选，组装不同DAO读取的数据实体**
    - Dao：原始的数据输入组件
-- 六边形模型：领域对象位于中心，周围是 `Input / Output Adapter` 
+- 六边形模型：领域对象位于中心，周围是 `Input / Output Adapter` 
 
 
 
@@ -453,10 +453,10 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 在从多个数据源读取对象的数据时，需要使用repository来封装这些与数据源交互的细节，我们常用的访问db的dao应该是repository的一个组件，与dao相似的是，redis读取的逻辑也应该封装到repository中。
 
 
-例如，实现一个拉取文章列表 `listArticle` 的逻辑，每个文章除了自身信息存储在 db 中外，还有点赞等信息存储在 redis 中，此时我们将 `articleDao.listById` 和 `articleRedisUtil.loadLikeNum` 读取点赞数的逻辑封装在  `articleRepo` 的子方法中，一是方便在通过不同方式（例如 `loadById` 等等）读取文章时能复用读取点赞的逻辑，二是屏蔽了对象底层的存储细节，避免  `infrastructure` 的概念泄漏到 `service` 层中。
+例如，实现一个拉取文章列表 `listArticle` 的逻辑，每个文章除了自身信息存储在 db 中外，还有点赞等信息存储在 redis 中，此时我们将 `articleDao.listById` 和 `articleRedisUtil.loadLikeNum` 读取点赞数的逻辑封装在  `articleRepo` 的子方法中，一是方便在通过不同方式（例如 `loadById` 等等）读取文章时能复用读取点赞的逻辑，二是屏蔽了对象底层的存储细节，避免  `infrastructure` 的概念泄漏到 `service` 层中。
 
 
-同理，如果领域模型需要发布时间，发布的逻辑同样应当包含在 `articleRepo` 中，模型做的事情就是单纯的把 `event` 存储到自身的 `events` 字段中。
+同理，如果领域模型需要发布时间，发布的逻辑同样应当包含在 `articleRepo` 中，模型做的事情就是单纯的把 `event` 存储到自身的 `events` 字段中。
 
 
 Repository 正如其名，其本质是领域对象的仓库，是领域对象和基础设置之间的桥梁。
@@ -570,7 +570,7 @@ public class MetaData {
 时钟有两种：时钟和单调钟。前者适用于获取当前绝对时间，后者适用于衡量时间流逝。
 
 
-通常我们使用的 `System.currentTimeMillis()` 是本机的系统时钟，有可能因为 `NTP(The Network Time Protocol)` 发生时间回退的问题，导致不可靠的分布式系统异常，例如「最后写入为准」中的时间戳实际上并非分布式系统中全局一致的时间戳。与之相对的， `System.nanoTime` 是「单调钟」，他的绝对值没有意义，但其保证了自增的性质，使用与时间长度的计算，例如请求耗时、计算耗时。
+通常我们使用的 `System.currentTimeMillis()` 是本机的系统时钟，有可能因为 `NTP(The Network Time Protocol)` 发生时间回退的问题，导致不可靠的分布式系统异常，例如「最后写入为准」中的时间戳实际上并非分布式系统中全局一致的时间戳。与之相对的， `System.nanoTime` 是「单调钟」，他的绝对值没有意义，但其保证了自增的性质，使用与时间长度的计算，例如请求耗时、计算耗时。
 
 
 领域对象需实现 Java Bean 规范的 getter / setter
