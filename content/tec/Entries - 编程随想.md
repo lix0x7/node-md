@@ -365,8 +365,16 @@ class Project{
 
 
 # 日志规范
-日志打印的基本内容：traceId、线程、级别、时间、方法、行数、访问用户身份标识。
+日志打印的基本内容应包括：时间、env、traceId、线程、日志级别、logger、业务标识（用户id等）。
 
+对于请求日志，需要额外打印如下信息：
+- caller: 主调方
+- callee: 被调方
+- path: 访问路径
+- response: 原始返回体
+- cost: 请求耗时
+- status: 返回的业务状态码
+- isTimeout: 是否超时
 
 需要注意如下的关键点：
 
