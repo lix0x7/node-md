@@ -2,9 +2,9 @@
 
 
 - 《领域设计精粹》
-- [后端开发实践系列——领域驱动设计(DDD)编码实践](https://insights.thoughtworks.cn/backend-development-ddd/) 
-- [使用DDD指导业务设计的一点思考](https://insights.thoughtworks.cn/ddd-business-design/) 
-- [阿里云：如何写好业务代码 - 知乎回答](https://www.zhihu.com/question/60761181/answer/874296743) 
+- [后端开发实践系列——领域驱动设计(DDD)编码实践](https://insights.thoughtworks.cn/backend-development-ddd/) 
+- [使用DDD指导业务设计的一点思考](https://insights.thoughtworks.cn/ddd-business-design/) 
+- [阿里云：如何写好业务代码 - 知乎回答](https://www.zhihu.com/question/60761181/answer/874296743) 
 # 限界上下文与通用语言 -> 战略设计
 
 
@@ -357,7 +357,7 @@
 - 代码模块分包
 - RESTful API 设计
 - 数据库设计：一个实体一张表
-- Redis Key：`聚合根:id:一级实体:id:二级实体:id` 
+- Redis Key：`聚合根:id:一级实体:id:二级实体:id` 
 - 消息队列 Topic：聚合根 - Topic
 - 对象存储资源目录：按照聚合根实体树构建目录结构，一个目录对应一张数据表，便于后期清除垃圾数据
 - 权限划分
