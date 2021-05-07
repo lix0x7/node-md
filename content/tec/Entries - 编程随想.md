@@ -439,12 +439,11 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
       - **Biz：核心业务逻辑，仅由Service调用**
    - **[ Repo ]：可选，组装不同DAO读取的数据实体**
    - Dao：原始的数据输入组件
-- 六边形模型：领域对象位于中心，周围是 `Input / Output Adapter` 
-
-
+- 六边形模型：领域对象位于中心，周围是 `Input / Output Adapter`，如下图：
+  
+  ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1603939654655-7352f2a6-2274-4a16-ad01-638c60986564.png#align=left&display=inline&height=752&margin=%5Bobject%20Object%5D&name=image.png&originHeight=752&originWidth=1100&size=947781&status=done&style=none&width=1100)
 
 其核心要义在于，Biz 或者领域对象，一定可以独立于框架（Spring等）存在，并且可以独立的进行测试。
-
 
 或者，使用数据管道操作同一个对象，此时需要保证每一个管道组成部分都可以独立运作并测试。
 

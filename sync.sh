@@ -1,4 +1,4 @@
 git add .
-git commit -m "SYNC BY SCRIPT"
+git commit -m "sync by script"
 git pull --rebase
 git push
