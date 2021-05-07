@@ -385,7 +385,7 @@ class Project{
 - 对于异常，一定要打印完整堆栈信息，如果需要包装异常，一定要打印log原始的错误
 - 配置加载前后一定要打印日志
 - 定时任务执行前后一定要打印日志
-- 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, rsp: {}, cost: [ 123ms ]` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response` 
+- 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, rsp: {}, cost: 123ms` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response` 
 - access日志维持特定格式，方便后期解析分析与统计。例如：统计近七天访问下游某服务的平均耗时与超时比例
 - 预留 API 动态调整日志级别
 - 对于Java框架中的日志，记得补充线程池调用缺少的MDC信息，例如：
