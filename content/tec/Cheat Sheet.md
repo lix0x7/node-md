@@ -1,15 +1,20 @@
 # docker
+
+这个很全，可以直接使用：[wsargent / docker-cheat-sheet](https://github.com/wsargent/docker-cheat-sheet/blob/master/zh-cn/README.md)
+
+下面列一些个人常用的：
 - `docker inspect <container-name>`
 - `docker pull`
 - `docker ps -a`
-- `docker run -it <img>`: 交互式运行镜像
+- `docker run --name <container-name> -it -v <volume-name>:<in-container-path>:<host-path> <img>`: 交互式运行镜像
 
+## container lifecycle
+![](https://miro.medium.com/max/2258/1*vca4e-SjpzSL5H401p4LCg.png)
 
 # k8s
 
 
 # gcc
-
 
 - `-o`设置目标文件名
 - `-I`设置需要引入的头文件夹
@@ -24,20 +29,16 @@
 gcc webserver_liburing.c -L/lib/liburing/src -L/lib/liburing/ -I/lib/liburing/src/include/ -o webserver_liburing
 ```
 
-
 ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/man-pages/man1/gcc.1.html)
 
 
 # Maven
-
 - `mvn clean package`
 - `mvn clean deploy`
 - `mvn dependency:tree`
 
 
 # Linux
-
-
 - `top`
    - -H 查看线程
 - `ll --block-size m`
@@ -66,14 +67,12 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 - `apt autoremove`: remove useless dependencies
 
 
-
 ### dpkg
 
 - 安装 `dpkg -i *.deb`
 - 卸载 `dpkg -r`
 - 列表 `dpkg -l`
 - [https://man7.org/linux/man-pages/man1/dpkg.1.html](https://man7.org/linux/man-pages/man1/dpkg.1.html)
-
 
 
 # MySQL
@@ -84,10 +83,9 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 - `desc <table_name>;`
 
 
-
 # Redis CLI
 
-- `redis-cli -h host -p port -a password -n database`
+- `redis-cli -h <host> -p <port> -a <password> -n <database>`
 - `ttl`
 
 
@@ -100,13 +98,9 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 
 # keymaps
 
-
-On macOS, use the `command`as `ctrl`and the`option`as `alt`.
-
-
 对于 `ctrl+left`这类快捷键，使用系统级改键的方式实现而不是修改每一个软件的快捷键是出于如下考虑：这是一个系统级的操作，去逐一修改软件是不现实的，大多软件以此为默认操作，并且不提供修改方式。
 
-
+在 mac 上，使用 `command` 替代 `ctrl`；使用 `option` 替代 `alt`。
 
 | 编辑操作 |  |  |
 | --- | --- | --- |
@@ -145,6 +139,4 @@ On macOS, use the `command`as `ctrl`and the`option`as `alt`.
 | F10 | Step over. |  |
 | F11 | Step into. |  |
 | Shift + F11 | Stop out. |  |
-
-
 
