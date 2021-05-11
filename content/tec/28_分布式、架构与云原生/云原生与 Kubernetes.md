@@ -1,21 +1,27 @@
-# 为什么要云原生
-
-
 # 什么是云原生
 
+CNCF 关于云原生给出的描述如下：
+
+> Cloud native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.
+>
+> These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil.
+
+简单来说，云原生是一种面向云端环境的编程与架构方式，使得系统可以组件松耦合、弹性化、自动化、易管理、易观测、快速迭代。
+
+实践上，通常会满足如下条件：
+
+- 无状态、容器化
+- 容器自动编排
+- 微服务
+- 满足云原生12要素
+- DevOps
+- 混沌工程
 
 ## 云原生十二要素
 
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1593571295049-16176836-0e6b-40b8-9219-88266598be77.png#align=left&display=inline&height=295&margin=%5Bobject%20Object%5D&name=image.png&originHeight=589&originWidth=555&size=407793&status=done&style=none&width=277.5)
-## 随笔记录
-
-- 滚动更新过程中，terminating的pod回先被移出service，执行prestop后退出才会真的退出。如果prestop终止服务运行，那此时该pod是可以正确接收用户请求并处理的。（17.2.4）
-
-
 
 # Container 容器
-
 
 ## 资源隔离实现
 
@@ -35,7 +41,6 @@
 
 ## 目前缺陷
 > In theory, a container image can be run on any Linux machine running Docker, but one small caveat exists—one related to the fact that all containers running on a host use the host’s Linux kernel. If a containerized application requires a specific kernel version, it may not work on every machine. If a machine runs a different version of the Linux kernel or doesn’t have the same kernel modules available, the app can’t run on it.
-
 
 
 # Kubernetes 概览
