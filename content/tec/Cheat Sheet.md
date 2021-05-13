@@ -39,23 +39,26 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 
 
 # Linux
+
 - `top`
-   - -H 查看线程
+  - -H 查看线程
 - `ll --block-size m`
 - `grep`
-   - -i 忽略大小写
-   - -o 仅输出匹配部分
-   - -e 正则匹配
+  - -i 忽略大小写
+  - -o 仅输出匹配部分
+  - -e 正则匹配
+  - -v 仅输出不匹配部分
 - `netstat -apno`
-   - -a all
-   - -p 打印关联的进程
-   - -n 显示ip而非域名
-   - -o 显示timer列，显示长短连接和长连接保活时间
+  - -a all
+  - -p 打印关联的进程
+  - -n 显示ip而非域名
+  - -o 显示timer列，显示长短连接和长连接保活时间
 - `ps -eLf`
-   - -e 打印所有进程
-   - -L 打印线程信息
-   - -f 打印所有可用信息
-
+  - -e 打印所有进程
+  - -L 打印线程信息
+  - -f 打印所有可用信息
+- `awk`
+- `tee <file>` 同时到标准输出和文件
 
 
 ## apt
