@@ -6,7 +6,7 @@ CNCF 关于云原生给出的描述如下：
 >
 > These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil.
 
-简单来说，云原生是一种面向云端环境的编程与架构方式，使得系统可以组件松耦合、弹性化、自动化、易管理、易观测、快速迭代。
+简单来说，云原生是一种面向云端环境的编程与架构方式，使得系统可以组件松耦合、弹性化、自动化、自恢复、易管理、易观测、快速迭代。
 
 实践上，通常会满足如下条件：
 
