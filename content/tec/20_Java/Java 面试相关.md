@@ -834,6 +834,10 @@ JVM中的类加载器层级如下：启动类加载器(`<JAVA_HOME>/lib`)<-扩�
 ### AOP 原理？
 // todo
 
+1. 编译期字节码写入
+2. 对于非 `final class` 在运行时继承类实现
+3. 对于 `final class` 使用 jdk 动态代理实现
+
 ### 
 
 
