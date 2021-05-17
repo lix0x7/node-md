@@ -129,6 +129,9 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
          1. __Rsp
          1. __Buffer
          1. __Time 毫秒级时间戳
+         1. __Total 总量
+         1. __AccuTotal 累积量
+         1. __Avg 平均值
       4. 常量名
          1. CONST_VALUE_LIST
       5. 数据库字段
@@ -239,57 +242,6 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
                   - data: `string` 列表项信息
 
 
-
-# 命名规范
-业务、项目、代码根据如下这个顺序来命名字段，降低思考负担。
-
-- 环境：例如 prod / test
-- 业务：例如 blog / shop
-- 服务类型：例如 server / gw / fe，分别代表后端服务、网关（接入层）、前端服务
-- 子域：例如 article / feed / user
-- 聚合根 / 实体：例如 timeline
-- 属性：例如 id / type / status / isDelete / createBy
-- 数据库字段
-   - 实例名：与业务名相同
-   - 表名：与聚合根相同
-   - 列名：与属性名相同
-
-
-
-由此很容易定位一个对象所属的语境，例如 prod_blog_server.article.timeline.status
-如果大语境下已经包含了其中某些字段，则**务必**要省略这些部分，避免冗余。
-
-
-不同系统间的核心命名尽可能保持一致，例如包含了前后端服务的单体 Git 仓库名为 `blog` ，则前后端服务在 K8s workloads 命名分别为 `fe-blog` / `server-blog` ，后台服务日志主题命名为 `server-blog` ，这样可以避免不同系统间不一致的命名引发记忆负担。 
-
-
-与此保持一致的命名还应有开发阶段涉及到各个方面，例如浏览器收藏夹、密码管理工具文件夹、文件系统文件夹。
-
-
-# Git commit 规范
-主要参考 [angular - Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit) ，但精简如下，内容全小写：
-```
-<type>(<scope>): <short summary>
-  │       │             │
-  │       │             └─⫸ Summary in present tense
-  │       │
-  │       └─⫸ Commit Scope: 相关业务，一般为DDD中的Domain，可选
-  │
-  └─⫸ Commit Type: build|ci|doc|feat|fix|perf|refactor|test|...
-```
-其中 `type` 包含但不仅限于下：
-
-- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
-- **doc**: Documentation only changes
-- **feat**: A new feature
-- **fix**: A bug fix
-- **perf**: A code change that improves performance
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **test**: Adding missing tests or correcting existing tests
-
-
-
 # 如何计算排期？
 计算排期要区分不同的功能类型，对于不同的功能有不同的实现时间要求，将其相加后再留适度的 buffer 即可。越大的项目，排期越不准，应当向产品明确出来这种风险。如下是几种常见情况，仅供参考：
 
@@ -383,8 +335,54 @@ class Project{
 
 其实这也就是 OO 所强调的封装，但是在事务脚本大行其道的时代，似乎都被抛弃了。最明显的地方在于，将 `NORMAL` 这个概念封装，如果未来我们需要扩展一个“试用”的状态，这个状态仍然是正常的，但属于另外一个状态了。我们只需要修改 `isNormal` 方法。但对于事务脚本，我们需要注意修改所有使用了类似的语义地方。
 
+# 规范
 
-# 日志规范
+## 命名规范
+业务、项目、代码根据如下这个顺序来命名字段，降低思考负担。
+
+- 环境：例如 prod / test
+- 业务：例如 blog / shop
+- 服务类型：例如 server / gw / fe，分别代表后端服务、网关（接入层）、前端服务
+- 子域：例如 article / feed / user
+- 聚合根 / 实体：例如 timeline
+- 属性：例如 id / type / status / isDelete / createBy
+- 数据库字段
+    - 实例名：与业务名相同
+    - 表名：与聚合根相同
+    - 列名：与属性名相同
+
+由此很容易定位一个对象所属的语境，例如 prod_blog_server.article.timeline.status
+如果大语境下已经包含了其中某些字段，则**务必**要省略这些部分，避免冗余。
+
+不同系统间的核心命名尽可能保持一致，例如包含了前后端服务的单体 Git 仓库名为 `blog` ，则前后端服务在 K8s workloads 命名分别为 `fe-blog` / `server-blog` ，后台服务日志主题命名为 `server-blog` ，这样可以避免不同系统间不一致的命名引发记忆负担。
+
+与此保持一致的命名还应有开发阶段涉及到各个方面，例如浏览器收藏夹、密码管理工具文件夹、文件系统文件夹。
+
+
+## Git commit 规范
+主要参考 [angular - Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit) ，但精简如下，内容全小写：
+```
+<type>(<scope>): <short summary>
+  │       │             │
+  │       │             └─⫸ Summary in present tense
+  │       │
+  │       └─⫸ Commit Scope: 相关业务，一般为DDD中的Domain，可选
+  │
+  └─⫸ Commit Type: build|ci|doc|feat|fix|perf|refactor|test|...
+```
+其中 `type` 包含但不仅限于下：
+
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
+- **doc**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **test**: Adding missing tests or correcting existing tests
+
+
+## 日志规范
 日志打印的基本内容应包括：时间、env、traceId、线程、日志级别、logger、业务标识（用户id等）。
 
 对于请求日志，需要额外打印如下信息：
@@ -433,6 +431,11 @@ try {
 
 
 Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
+
+## 监控规范
+- CPU: 70%
+- 内存: 80%
+- 服务重启（Pod销毁重建）: 每次
 
 
 # 使用四层（五层）模型或六边形模型而非三层模型
