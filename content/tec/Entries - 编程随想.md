@@ -464,6 +464,7 @@ try {
 Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 
 ## 监控规范
+- 健康检查
 - CPU: 70%
 - 内存: 80%
 - 服务重启（Pod销毁重建）: 每次
@@ -591,7 +592,8 @@ Repository 正如其名，其本质是领域对象的仓库，是领域对象和
 通常我们使用的 `System.currentTimeMillis()` 是本机的系统时钟，有可能因为 `NTP(The Network Time Protocol)` 发生时间回退的问题，导致不可靠的分布式系统异常，例如「最后写入为准」中的时间戳实际上并非分布式系统中全局一致的时间戳。与之相对的， `System.nanoTime` 是「单调钟」，他的绝对值没有意义，但其保证了自增的性质，使用与时间长度的计算，例如请求耗时、计算耗时。
 
 
-领域对象需实现 Java Bean 规范的 getter / setter
+# 领域对象需实现 Java Bean 规范的 getter、setter、无参构造器
+
 虽然完全暴露 getter 和 setter 对于领域对象而言是「错误」的，但是这 getter / setter 是整个 Java 生态都遵循的的 Java Bean 规范，为了保证各种组件（尤其是 JSON ）都能正常完整的访问到对象，还是要注意完全实现所有的 getter / setter。
 
 
