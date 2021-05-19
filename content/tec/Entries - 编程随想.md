@@ -594,7 +594,7 @@ Repository 正如其名，其本质是领域对象的仓库，是领域对象和
 
 # 领域对象需实现 Java Bean 规范的 getter、setter、无参构造器
 
-虽然完全暴露 getter 和 setter 对于领域对象而言是「错误」的，但是这 getter / setter 是整个 Java 生态都遵循的的 Java Bean 规范，为了保证各种组件（尤其是 JSON ）都能正常完整的访问到对象，还是要注意完全实现所有的 getter / setter。
+虽然完全暴露 getter 和 setter 对于领域对象而言是「错误」的，但是这 getter / setter 是整个 Java 生态都遵循的的 Java Bean 规范，为了保证各种组件（JSON、ORM等）都能正常完整的访问到对象，还是要注意完全实现所有的 getter / setter。
 
 
 举个例子：未实现完整 getter / setter 时，通过 Jackson 序列化后缓存到 redis 中，可能导致序列化字段不完整，进一步导致返回的反序列化数据不完整。
