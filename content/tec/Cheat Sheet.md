@@ -6,7 +6,8 @@
 - `docker inspect <container-name>`
 - `docker pull`
 - `docker ps -a`
-- `docker run --name <container-name> -it -v <volume-name>:<in-container-path>:<host-path> <img>`: 交互式运行镜像
+- `docker run -rm --name <container-name> -it -v <volume-name>:<in-container-path>:<host-path> <img>`: 交互式运行镜像
+  - `-rm`: 容器退出即删除
 
 ## container lifecycle
 ![](https://miro.medium.com/max/2258/1*vca4e-SjpzSL5H401p4LCg.png)

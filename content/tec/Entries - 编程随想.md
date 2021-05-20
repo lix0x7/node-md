@@ -135,10 +135,10 @@ C语言则是Linux的开发语言，Linux的系统调用也通过C语言方法�
       4. 常量名
          1. CONST_VALUE_LIST
       5. 数据库字段
-         1. createBy
-         1. updateBy
-         1. createTime - 毫秒级时间戳
-         1. updateTime - 毫秒级时间戳
+         1. createdBy
+         1. updatedBy
+         1. createdTime - 毫秒级时间戳
+         1. updatedTime - 毫秒级时间戳
          1. __Date - 整型日期，例如 `20200101` 
 2. RESTful API 规范与习惯
 2. Project Layout / Readme Template
