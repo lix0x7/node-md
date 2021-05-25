@@ -460,6 +460,12 @@ try {
 }
 ```
 
+日志模板 sample log4j
+```xml
+<Property name="pattern.cls">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%X{env}][%X{service}][%X{traceId}][%-5level][%logger{3}][%X{channel-id}][%X{wecar-id}]-%notEmpty{[optionalField=%X{optional}]}%replace{%msg %rEx{36}}{[\r\n]+}{ }%ex{0}%n</Property>
+```
+
+// todo - 可以实现一个工具去动态的添加日志的各个字段（必填、选填、默认）并生成解析用的正则表达式、MDC工具类
 
 Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 
@@ -551,8 +557,6 @@ Repository 正如其名，其本质是领域对象的仓库，是领域对象和
 - 运维与监控：维护日志模板、预留性能指标接口
 - 性能优化：方法论
 
-
-
 这其中需要准备如下这些资源，均需至少两套，对应正式环境和测试环境：
 
 - 部署环境：K8s Workloads、DB、MQ
@@ -560,7 +564,6 @@ Repository 正如其名，其本质是领域对象的仓库，是领域对象和
 - 服务发现注册：如果非服务自注册，则需要配置服务发现
 - 日志上报：正式与测试环境共用一套即可，方便快速定位是否为访问环境错误的问题
 - 监控告警
-
 
 
 # 解耦的核心是隔离可变性，让代码 Easy to Change
