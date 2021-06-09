@@ -381,19 +381,18 @@ public class MetaData {
   │       │
   │       └─⫸ Commit Scope: 相关业务，一般为DDD中的Domain，可选
   │
-  └─⫸ Commit Type: build|ci|doc|feat|fix|perf|refactor|test|...
+  └─⫸ Commit Type: 参考下文列表
 ```
 其中 `type` 包含但不仅限于下：
 
-- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
-- **doc**: Documentation only changes
-- **feat**: A new feature
-- **fix**: A bug fix
-- **perf**: A code change that improves performance
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **test**: Adding missing tests or correcting existing tests
-
+- **ci**: 构建相关文件调整，例如 CI 配置、构建脚本调整、dockerfile 调整
+- **doc**: 文档更新
+- **feat**: 新需求开发
+- **fix**: bug 修复
+- **perf**: 性能优化
+- **refactor**: 代码重构，非产品需求和 bug 修复
+- **test**: 添加或调整测试
+- **config**: 配置项调整
 
 ## 日志规范
 日志打印的基本内容应包括：时间、env、traceId、线程、日志级别、logger、业务标识（用户id等）。
@@ -464,6 +463,8 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
     - 吞吐量
     - 错误
     - 饱和度（CPU / MEM）
+  
+需要注意的是很多应用会预分配内存（例如 JVM），此时内存阈值应当适当调高到85%。但对于不会预分配内存的，内存阈值应当保守些，设置为60%，否则可能在雪崩的情况下留给开发者解决系统异常的时间过短。
 
 Ref: [SRE](./28_分布式、架构与云原生/SRE.md)
 
@@ -533,18 +534,32 @@ Repository 正如其名，其本质是领域对象的仓库，是领域对象和
 每个阶段都可以准备相应的模板，大大提高效率
 
 - 明确需求
+  
+  输出明确的产品需求文档。
+
 - 系统设计：方法论
+  
+  输出 ER 图，即实体与实体间关系。
+
 - 编码开发：
-    - 维护项目代码模板，善用 IDE 的模板功能去整理模板代码，例如 HTTP 请求、缓存等、领域对象、建表 sql 等
-    - 预留内部接口实现特定功能
-    - 预留曳光弹接口，检测下游组件稳定性
+
+  输出项目代码、SQL 文件等
+  
+  - 维护项目代码模板，善用 IDE 的模板功能去整理模板代码，例如 HTTP 请求、缓存等、领域对象、建表 sql 等
+  - 预留内部接口实现特定功能
+  - 预留曳光弹接口，检测下游组件稳定性
+  
 - 测试
-    - 单元测试：对应功能性方法进行单元测试
-    - 集成测试：对业务逻辑进行集成测试，从Controller到DB，mock外部依赖
+
+  - 单元测试：对应功能性方法进行单元测试
+  - 集成测试：对业务逻辑进行集成测试，从Controller到DB，mock外部依赖
+  
 - 上线：
-    - 配置 CI / CD 模板
-    - 配置日志上报
-    - 设置监控告警
+  
+  - 配置 CI / CD 模板
+  - 配置日志上报
+  - 设置监控告警
+
 - 运维与监控：维护日志模板、预留性能指标接口
 - 性能优化：方法论
 
