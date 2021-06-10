@@ -263,12 +263,9 @@
 
 # 领域事件 -> 战术设计
 
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1585473749712-c31a5e7a-2967-4afd-af00-da7b4f82ac83.png#align=left&display=inline&height=382&margin=%5Bobject%20Object%5D&name=image.png&originHeight=764&originWidth=926&size=546678&status=done&style=none&width=463)
 
-
 领域事件是一条记录，记录着在限界上下文中发生的对业务产生重要影响的事情。
-
 
 要重视领域事件的命名，其用词应明确体现出模型的通用语言，并且使用动词的过去式，代表对过去发生的事情的陈述，例如 ProductCreated。而且领域实践中必须包含相应的资源标识符、对时间的描述等信息，例如下图这些事件表示：
 
@@ -323,23 +320,30 @@
 - 值对象
 
 
-## 业务实现
+## 子域业务实现
 
-读写实现是不同的，因为读操作更注重批量读取满足某种条件的元素，而写操作更注重业务逻辑，故将两者拆开。让命令式变成和DDD都能在各自擅长的领域发挥作用。
+每个子域（微服务）在业务实现上可以参考下图：
 
-从整个系统的角度来看：
+![](assets/ddd-项目结构.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1603939584160-692d690b-501e-47bf-a9c1-e9502dabd11c.png#align=left&display=inline&height=493&margin=%5Bobject%20Object%5D&name=image.png&originHeight=596&originWidth=794&size=204580&status=done&style=none&width=657)
+其中每个部分功能如下：
+- `Adapter`： 外部入口，用于协议转换、参数校验等功能
+- `Application Service`: 应用服务层，实现领域对象对 `Repository` 和 `Domain Service` 的调用、内外服务协同的集成逻辑等
+- `Domain Service`: 领域服务层，实现核心领域业务逻辑
+- `Repository`: 用于数据增删改查和权限控制
+- `Infrastructure`: 基础架构层，实现具体的技术组件相关代码
 
 从六边形架构的角度来看，领域模型位于核心，被周围的各类输入输出适配器围绕：
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1603939654655-7352f2a6-2274-4a16-ad01-638c60986564.png#align=left&display=inline&height=752&margin=%5Bobject%20Object%5D&name=image.png&originHeight=752&originWidth=1100&size=947781&status=done&style=none&width=1100)
 
+此外，对于 CQRS，其读写实现是不同的，因为读操作更注重批量读取满足某种条件的元素，而写操作更注重业务逻辑，故将两者拆开。让命令式编程和 DDD 都能在各自擅长的领域发挥作用。如下图：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1603939584160-692d690b-501e-47bf-a9c1-e9502dabd11c.png#align=left&display=inline&height=493&margin=%5Bobject%20Object%5D&name=image.png&originHeight=596&originWidth=794&size=204580&status=done&style=none&width=657)
 
 ## DDD 指导子系统设计
 
 根据领域模型结构，我们可以去规范化以下资源的结构，降低思考负担。
-
 
 - 代码模块分包
 - RESTful API 设计
