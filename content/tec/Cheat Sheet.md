@@ -60,6 +60,7 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
   - -f 打印所有可用信息
 - `awk`
 - `tee <file>` 同时到标准输出和文件
+- `curl -X POST www.qq.com -d '{"param": "1234"}' -H 'content-type: application/json'`
 
 
 ## apt
