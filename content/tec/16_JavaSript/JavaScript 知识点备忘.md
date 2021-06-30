@@ -55,17 +55,17 @@ a instanceof Array // true
 - false
 - 0
 - NaN
-- 空字符串： `""`  `''` 
+- 空字符串： `""`  `''` 
 
-需要注意的是，空列表 `[]` 和空对象 `{}` 并不是 false 的。
+需要注意的是，空列表 `[]` 和空对象 `{}` 并不是 false 的。
 
 ## 数值
 
-所有的数值底层都是浮点数， `1 === 1.0` 的判断结果为 true。
+所有的数值底层都是浮点数， `1 === 1.0` 的判断结果为 true。
 
 浮点数运算注意浮点误差。
 
-JS 使用 IEEE 754 标准与 64 位存储浮点数，Number 对象得 MAX_VALUE 和 MIN_VALUE 是 JS 可以表现得最大值和最小值。
+JS 使用 IEEE 754 标准与 64 位存储浮点数，Number 对象得 MAX_VALUE 和 MIN_VALUE 是 JS 可以表现得最大值和最小值。
 
 ```javascript
 Number.MAX_VALUE // 1.7976931348623157e+308
@@ -78,7 +78,7 @@ Number.MIN_VALUE // 5e-324
 - NaN
 - Infinity、 -Infinity
 
- NaN 属于 Number 类型。
+ NaN 属于 Number 类型。
 
 ```javascript
 typeof NaN // 'number'
@@ -168,7 +168,7 @@ a[2.1] = 'abc';
 a.length // 0
 ```
 
-添加键名会导致 `for ... in` 读到这些键名，所以推荐使用 ES6 `for ... of` 。
+添加键名会导致 `for ... in` 读到这些键名，所以推荐使用 ES6 `for ... of` 。
 
 ```javascript
 var a = [1, 2, 3];
@@ -192,7 +192,7 @@ var arr = [ 'a', 'b', 'c' ];
 4 in arr // false
 ```
 
-使用 delete 命令删除一个数组成员，会形成空位，并且不会影响 length 属性。数组的某个位置是空位，与某个位置是 undefined，是不一样的。如果是空位，使用数组的 forEach 方法、 `for...in` 结构、以及 `Object.keys` 方法进行遍历，空位都会被跳过。如果某个位置是 undefined，遍历的时候就不会被跳过。JS 对于空位的处理很不同意，所以应避免出现空位。
+使用 delete 命令删除一个数组成员，会形成空位，并且不会影响 length 属性。数组的某个位置是空位，与某个位置是 undefined，是不一样的。如果是空位，使用数组的 forEach 方法、 `for...in` 结构、以及 `Object.keys` 方法进行遍历，空位都会被跳过。如果某个位置是 undefined，遍历的时候就不会被跳过。JS 对于空位的处理很不同意，所以应避免出现空位。
 
 ```javascript
 var a = [1, 2, 3];
@@ -285,7 +285,7 @@ y // 10
 
 Object.prototype.toString 方法返回对象的类型字符串，因此可以用来判断一个值的类型。
 
-由于实例对象可能会自定义 toString 方法，覆盖掉 Object.prototype.toString 方法，所以为了得到类型字符串，最好直接使用 Object.prototype.toString 方法。通过函数的 call 方法，可以在任意值上调用这个方法，帮助我们判断这个值的类型。    
+由于实例对象可能会自定义 toString 方法，覆盖掉 Object.prototype.toString 方法，所以为了得到类型字符串，最好直接使用 Object.prototype.toString 方法。通过函数的 call 方法，可以在任意值上调用这个方法，帮助我们判断这个值的类型。    
 
 ```javascript
 Object.prototype.toString.call(value)
@@ -370,7 +370,7 @@ let aWithOverrides = Object.assign({}, a, { x: 1, y: 2 });
 
 ### 链式判断运算符（ES 2020）
 
-链式判断运算符指的是 `?.` ，可以避免连续的 null 或 undefined 检查，类似 Java 中的 Optional 和 Kotlin 中的 `?` :
+链式判断运算符指的是 `?.` ，可以避免连续的 null 或 undefined 检查，类似 Java 中的 Optional 和 Kotlin 中的 `?` :
 
 ```javascript
 const firstName = message?.body?.user?.firstName || 'default';
@@ -407,7 +407,7 @@ a?.b = c
 
 ### Null 判断运算符（ES 2020）
 
-通常，为变量设置运算符使用 `||` 运算符，但是这并不适用于变量为 false 或 0 这种隐式转换的情况。
+通常，为变量设置运算符使用 `||` 运算符，但是这并不适用于变量为 false 或 0 这种隐式转换的情况。
 
 ```javascript
 const headerText = response.settings.headerText || 'Hello, world!';
@@ -415,7 +415,7 @@ const animationDuration = response.settings.animationDuration || 300;
 const showSplashScreen = response.settings.showSplashScreen || true;
 ```
 
-ES 2020 引入 null 判断运算符 `??` ，更符合这种“非 null 非 undefined 则赋值的语义”
+ES 2020 引入 null 判断运算符 `??` ，更符合这种“非 null 非 undefined 则赋值的语义”
 
 ```javascript
 const headerText = response.settings.headerText ?? 'Hello, world!';
@@ -425,7 +425,7 @@ const showSplashScreen = response.settings.showSplashScreen ?? true;
 
 ## ES6 新增方法
 
-- Object.is(a, b)：与 `===` 行为基本一致，区别在于对 +0 / -0 、NaN 的判断；
+- Object.is(a, b)：与 `===` 行为基本一致，区别在于对 +0 / -0 、NaN 的判断；
 - Object.assign(target, ...source)：source 属性覆盖 target 属性，浅拷贝，而且对于 getter 无效；
 
 ## Array
@@ -653,4 +653,4 @@ p.then(function () {
 # Ref
 
 - [JavaScript 教程 - 网道](https://wangdoc.com/javascript/index.html)
-- [ECMAScript 6 入门 - 阮一峰](https://es6.ruanyifeng.com/#docs/) 
+- [ECMAScript 6 入门 - 阮一峰](https://es6.ruanyifeng.com/#docs/) 

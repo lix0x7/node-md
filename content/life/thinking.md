@@ -20,19 +20,20 @@
 纯文本不与任何工具强绑定，可以自由地迁移你用于管理信息的工具，解耦数据和工具。
 
 ## 文件目录结构：
- - book
- - note
- - program
- - program_data
- - project
-    - 210101_project-example_a
-      - archive
-      - code
-      - feat
- - backup
- - work
-    - example_company
-       - ...
+- book
+- note
+- note-md
+- program
+- program_data
+- project
+  - 210101_project-example_a
+    - archive
+    - code
+    - feat
+- backup
+- work
+  - example_company
+     - ...
   
 ## 自动化、模板化重复性任务
 要有自己应对各种问题的**模板**，可以快速地解决常见问题，降低思维成本。例如PPT模板（技术分享、报告、答辩）、周报模板、项目代码模板等。
@@ -49,6 +50,10 @@
 # 设计
 
 ## 平面设计四大原则：重复、对齐、对比、亲密性
+
+## 冷暖色
+
+暖色是前进式，冷色是后退式的。这进一步导致了暖色会更吸引人眼球，即使其字号可能更小、位置可能更偏。所以暖色适合作为强调色，而冷色适合作为背景色。
 
 # 理财
 

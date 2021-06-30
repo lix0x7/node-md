@@ -12,12 +12,12 @@
 ## list
 
 
-- method: `GET` 
+- method: `GET` 
 - path: `/v1/resource/list`
 - query:
    - pageNum {number}
    - pageSize {number}
-   - orderBy { [ [<field>, <order>], ...] } - e.g. `[['updateTime', 'desc'], ['status', 'asc']]` 先按时间倒序排列，再按状态正序排列
+   - orderBy { [ [<field>, <order>], ...] } - e.g. `[['updateTime', 'desc'], ['status', 'asc']]` 先按时间倒序排列，再按状态正序排列
    - search {string} - 搜索关键词
 - body
 - response
@@ -33,8 +33,8 @@
 ## getById
 
 
-- method: `GET` 
-- path: `/v1/resouce/:resourceId`
+- method: `GET` 
+- path: `/v1/resouce/:resourceId`
 - param
    - resourceId
 - reponse
@@ -83,5 +83,5 @@
 
 
 - [Microsoft REST API Guidelines](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md) ✨✨✨✨✨ 强烈推荐，实操性很强，但自定义语法较多，需要根据情况重新设计
-- [API设计的几条原则 - ThoughtWorks 少个分号](https://insights.thoughtworks.cn/how-to-design-api/) 
-- [Google API 设计指南](https://cloud.google.com/apis/design) 
+- [API设计的几条原则 - ThoughtWorks 少个分号](https://insights.thoughtworks.cn/how-to-design-api/) 
+- [Google API 设计指南](https://cloud.google.com/apis/design) 

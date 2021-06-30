@@ -9,7 +9,7 @@
 
 
 
-详细的原因分析、使用参考官方文档 [Effecient IO with io_uring](https://kernel.dk/io_uring.pdf) 即可，本文不做赘述，原文写的很简练清楚。[【译】高性能异步 IO —— io_uring (Effecient IO with io_uring)](http://icebergu.com/archives/linux-iouring) 是该文的一篇译文，质量很高，可以代替英文原文。
+详细的原因分析、使用参考官方文档 [Effecient IO with io_uring](https://kernel.dk/io_uring.pdf) 即可，本文不做赘述，原文写的很简练清楚。[【译】高性能异步 IO —— io_uring (Effecient IO with io_uring)](http://icebergu.com/archives/linux-iouring) 是该文的一篇译文，质量很高，可以代替英文原文。
 
 
 # 与epoll的区别
@@ -17,10 +17,10 @@ epoll只负责通知IO完成的事件，不负责具体IO。但是io_uring异步
 
 
 # Reactor / Proactor
-这个 [Event Handling Partterns](http://www.dre.vanderbilt.edu/~schmidt/POSA/POSA2/event-patterns.html) 讲的还挺好的，虽然简短了点。
+这个 [Event Handling Partterns](http://www.dre.vanderbilt.edu/~schmidt/POSA/POSA2/event-patterns.html) 讲的还挺好的，虽然简短了点。
 
 
 # Ref
 
 - [Lord of the io_uring](https://unixism.net/loti/index.html#) - io_uring 作者的官方网站
-- [【译】高性能异步 IO —— io_uring (Effecient IO with io_uring)](http://icebergu.com/archives/linux-iouring)  - 高质量的官方说明文档译文
+- [【译】高性能异步 IO —— io_uring (Effecient IO with io_uring)](http://icebergu.com/archives/linux-iouring)  - 高质量的官方说明文档译文

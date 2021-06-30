@@ -303,7 +303,7 @@ abstract class Super{
 	}
 	abstract void m();
 }
- 
+ 
 new Super(0x12345678) {
 	@Override
 	void m() {
