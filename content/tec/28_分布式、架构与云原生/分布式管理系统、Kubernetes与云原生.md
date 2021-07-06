@@ -96,7 +96,7 @@ K8s 本质上是分布式管理系统的一种实现，即管理、协调、调�
 # Service / Ingress
 
 
-# Volum
+# Volume
 
 
 # ConfigMap / Secret
