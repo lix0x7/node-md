@@ -29,7 +29,6 @@ CNCF 关于云原生给出的描述如下：
 - Cgroup
 
 
-
 > Two mechanisms make this possible. The first one, Linux Namespaces, makes sure each process sees its own personal view of the system (files, processes, network interfaces, hostname, and so on). The second one is Linux Control Groups (cgroups), which limit the amount of resources the process can consume (CPU, memory, network bandwidth, and so on).
 
 
@@ -46,6 +45,8 @@ CNCF 关于云原生给出的描述如下：
 # Kubernetes 概览
 
 K8s 本质上是分布式管理系统的一种实现，即管理、协调、调度分布式资源的软件。
+
+其最核心的理念，在于声明式（declarative）的资源管理，而非命令式(imperative)的操作。
 
 ## 架构
 > At the hardware level, a Kubernetes cluster is composed of many nodes, which can be split into two types:
