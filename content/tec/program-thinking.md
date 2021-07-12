@@ -693,7 +693,17 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
   - 吞吐量（接口）
   - 业务接口异常（HTTP & 业务状态码异常）：> 0.1%
 
-对于硬件，应主要监控饱和度：
+上述监控的维度应至少包含：
+- env: 环境
+- caller: 主调服务
+- caller_ip: 主调 ip
+- callee: 被调服务
+- callee_ip: 被调 ip
+- path: 访问路径
+- status: 返回的业务状态码
+- isTimeout: 是否超时
+
+对于服务硬件和下游依赖的硬件（DB、Redis 等），应主要监控饱和度：
 - CPU: > 70%
 - 内存: > 70%
 - 硬盘: > 70%
