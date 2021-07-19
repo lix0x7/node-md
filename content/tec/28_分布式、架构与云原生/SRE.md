@@ -100,3 +100,4 @@ SLA是服务质量协议（Agreement）：指服务与用户之间的一个明�
 # Ref
 
 - [Google SRE](https://book.douban.com/subject/26875239/)
+- [Google Cloud - DevOps 衡量：监控和可观测性](https://cloud.google.com/architecture/devops/devops-measurement-monitoring-and-observability?hl=zh-cn)
