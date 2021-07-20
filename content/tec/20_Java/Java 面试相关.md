@@ -838,8 +838,6 @@ JVM中的类加载器层级如下：启动类加载器(`<JAVA_HOME>/lib`)<-扩�
 2. 对于非 `final class` 在运行时继承类实现
 3. 对于 `final class` 使用 jdk 动态代理实现
 
-### 
-
 
 # 算法与数据结构
 
@@ -1054,7 +1052,9 @@ InnoDB就是通过类似的等待图实现的死锁检测，如果发现了死�
 ## 单例模式？Java的几种写法？
 
 
-- 直接加载```java
+- 直接加载
+
+```java
 public class Singleton{
 	private static Object singleton = new Object();
 	public static synchronized Object getSingleton(){
@@ -1063,9 +1063,11 @@ public class Singleton{
 }
 ```
 
-   - 优点：写法简单粗暴
-   - 缺点：每次读都要加锁，浪费时间；并且直接创建了对象，浪费空间
-- 懒加载```java
+- 优点：写法简单粗暴
+- 缺点：每次读都要加锁，浪费时间；并且直接创建了对象，浪费空间
+
+- 懒加载
+```java
 public class Singleton{
 	private static Object singleton = null;
 	public static synchronized Object getSingleton(){
@@ -1077,9 +1079,12 @@ public class Singleton{
 }
 ```
 
-   - 优点：实现简单；懒加载，节约资源
-   - 缺点：每次获取单例对象都要加锁，效率低
-- 双重检查```java
+- 优点：实现简单；懒加载，节约资源
+- 缺点：每次获取单例对象都要加锁，效率低
+
+- 双重检查
+
+```java
 public class Singleton{
 	private static volatile Object singleton = null;
 	public static Object getObject(){
@@ -1097,7 +1102,10 @@ public class Singleton{
 
 优点：懒加载；只在初始化的时候才加锁
 缺点：每次都要进行先判断
-- 静态内部类```java
+
+- 静态内部类
+
+```java
 public class Singleton{
 	//private构造方法，避免构造多个单例对象
 	private Singleton(){}
@@ -1113,7 +1121,10 @@ public class Singleton{
 ```
 
 优点：实现简单、依赖于JVM实现懒加载效率高
-- enum```java
+
+- enum
+
+```java
 public enum Singleton{
 	HOLDER();
 
@@ -1124,8 +1135,6 @@ public enum Singleton{
 	}
 }
 ```
-
-
 
 
 ## 为什么上面的双重检查的方法要使用volatile关键字？
@@ -1176,8 +1185,14 @@ JVM创建对象分为三个阶段：
 ## 装饰器模式
 
 
-# Spring相关
+# Spring 相关
 
+# 微服务开发相关
+
+## 击穿，穿透，雪崩
+- 击穿：热点 key 失效导致瞬间大量请求到 DB。可以加 DB 访问锁解决
+- 穿透：特殊的 key（例如 null key）被大量请求，直接打到 DB。可以通过缓存特殊 key 解决
+- 雪崩：同一时间大量缓存 key 失效，导致 DB 压力升高。可以通过缓存增加随机延迟避免同时失效大量 key
 
 # 其他
 
