@@ -19,6 +19,8 @@ epoll只负责通知IO完成的事件，不负责具体IO。但是io_uring异步
 # Reactor / Proactor
 这个 [Event Handling Partterns](http://www.dre.vanderbilt.edu/~schmidt/POSA/POSA2/event-patterns.html) 讲的还挺好的，虽然简短了点。
 
+简单来说，Reactor 是在事件发生后通知调用方执行动作。Proactor 是调用方注册事件处理动作，事件发生并且动作执行完后通知用户。 
+
 
 # Ref
 
