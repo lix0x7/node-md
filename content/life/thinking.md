@@ -5,7 +5,8 @@
 
 ## 知识管理工具
 - 临时文本：滴答清单
-- 知识沉淀与笔记：~~语雀~~、markdown + git
+- 中短期文本数据：语雀
+- 长期存储的文本数据，如知识沉淀与笔记：markdown + git
 - 私有文档、富文本文档：坚果云同步 note 文件夹
 - 待办、日历：滴答清单
 - 加密存储：坚果云同步 KeepPassXC
@@ -24,15 +25,15 @@
 - note
 - note-md
 - program
-- program_data
+- program-data
 - project
-  - 210101_project-example_a
+  - 210101-project-example-a
     - archive
     - code
     - feat
 - backup
 - work
-  - example_company
+  - example-company
      - ...
   
 ## 自动化、模板化重复性任务
