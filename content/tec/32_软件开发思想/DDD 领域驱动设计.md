@@ -1,12 +1,4 @@
-# Ref
-
-
-- 《领域设计精粹》
-- [后端开发实践系列——领域驱动设计(DDD)编码实践](https://insights.thoughtworks.cn/backend-development-ddd/) 
-- [使用DDD指导业务设计的一点思考](https://insights.thoughtworks.cn/ddd-business-design/) 
-- [阿里云：如何写好业务代码 - 知乎回答](https://www.zhihu.com/question/60761181/answer/874296743) 
-# 限界上下文与通用语言 -> 战略设计
-
+# 战略设计：限界上下文与通用语言
 
 ![](https://cdn.nlark.com/yuque/0/2020/png/657413/1584410855038-214b4af5-d6d5-4644-9e68-286ba6937dc7.png#align=left&display=inline&height=317&margin=%5Bobject%20Object%5D&originHeight=422&originWidth=722&size=0&status=done&style=none&width=542)
 
@@ -63,17 +55,13 @@
 
 
 
-# 子域 -> 战略设计
-
+# 战略设计：子域
 
 子域通常是和限界上下文一对一的。
 
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1585470857317-bc97c2af-cb17-4ded-88c6-5dfc4c303de6.png#align=left&display=inline&height=255&margin=%5Bobject%20Object%5D&name=image.png&originHeight=510&originWidth=1234&size=399498&status=done&style=none&width=617)
 
-
 ## 子域的类型
-
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1585471281819-d60d14e3-efec-4190-8391-471f670cacb9.png#align=left&display=inline&height=183&margin=%5Bobject%20Object%5D&name=image.png&originHeight=366&originWidth=948&size=298670&status=done&style=none&width=474)
 
@@ -92,13 +80,11 @@
 
 ### 通用子域
 
-
 通用一词指的是在市场上通用的子域，通常有成熟的解决方案，通过采购或外包的方式解决。
 
-
 总的来说，子域的划分不仅涉及资源分配、实现方式，还会影响组织架构与流程。核心域是产品独特的竞争力，他是产品之所以存在的根本。因此在产品的初期，没有经过市场验证之前，我们需要遵循 MVP（Minimum Viable Product）原则快读迭代以获取市场反馈，一旦产品被市场验证可行，则需要进行合理的重构。支撑子域不需要过度地考虑可扩展性和兼容性，可重用性并非技术着力的方向，可替代性才是。这就要求我们队支撑子域有着明确的七月规范和业务约束条件，即严格接口定义。
-# 上下文策略 -> 战略设计
 
+# 战略设计：上下文策略
 
 敏捷项目的核心域必须与其他限界上下文进行集成，这种集成关系在DDD中称为**上下文映射**（Context Mapping）。考虑到不同的限界上下文中存在不同的通用语言，那么两个团队在工作时，需要考虑如何适应对方的语言。
 
@@ -208,7 +194,7 @@
 
 
 
-# 实体、聚合 -> 战术设计
+# 战术设计：实体、聚合
 
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1585472813524-7fefc632-ec1d-4d0a-aa12-6f0b104cb69c.png#align=left&display=inline&height=258&margin=%5Bobject%20Object%5D&name=image.png&originHeight=516&originWidth=1098&size=643675&status=done&style=none&width=549)
@@ -252,6 +238,7 @@
 
 
 ## 如何设计聚合？
+
 满足面向对象要求内聚要求（即“组合关系”，相互依存，整体不存在了则部分也不存在了）的对象应该构建为一个聚合，其中核心概念应该构筑为聚合根。判断是否单独拆分为聚合根更该从面向对象的角度出发，事务边界作为辅助评价标准。如果满足事务边界的要求，那其实两者已经强耦合了；如果不满足事务要求，则不见得他们之间不满足面向对象中要求的内聚。毕竟，构建聚合的目的是将对聚合的操作都限制在聚合内，避免其业务逻辑外泄。
 
 例如，一个Project（项目）的DeliveredPkg（想用要用到的交付安装包）不能脱离Project单独存在，所以两者关系为OO中的"组合关系"，这类关系更适合放到一个聚合根里。与之对比的是Product和Project的关系，两者独立存在，互不影响，Project只是用到了某些Product，但是没有被Project用到的Product也可以存在，所以Project和Product适合拆分为两个聚合根，通过聚合根id引用。
@@ -261,7 +248,7 @@
 但大聚合的缺点在于其对应的repository实现会较为复杂，可以抽象相应的RepositoryFactory快速生成repository。
 
 
-# 领域事件 -> 战术设计
+# 战术设计：战术设计
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1585473749712-c31a5e7a-2967-4afd-af00-da7b4f82ac83.png#align=left&display=inline&height=382&margin=%5Bobject%20Object%5D&name=image.png&originHeight=764&originWidth=926&size=546678&status=done&style=none&width=463)
 
@@ -319,6 +306,7 @@
 - 实体
 - 值对象
 
+DDD 更像是面向对象思维的超集，它将软件开发的概念从类与类的关系上上升到了服务与服务间的关系，并提出了领域事件、CQRS 等架构方法。
 
 ## 子域业务实现
 
@@ -373,6 +361,48 @@
 
 
 ## DDD的缺点
-DDD不是万能的，其缺点也很明显。DDD需要领域专家、产品、开发达成一个对业务模型建模的共识，即领域知识。这个建模会很大程度上影响开发的OO建模。在互联网产品快速迭代的情况下，并没有很充裕的时间留给多方人员共同建模，更多情况是只有开发人员自己根据片面的对领域知识的理解，设计了编程上的模型；糟糕的是，这个建模很容易被产品迭代打破，也就会进一步导致开发伤筋动骨的重构与重写已有的模型代码。
 
-所以，对于简单业务、业务模型不稳定、高速迭代的场景，还是使用比较薄的逻辑层（Biz）去操作POJO更为灵活，同时也不缺乏面向对象的特性，这种代码写起来更像是在写面向对象的C语言（Linux系统的风格，struct+操作该结构体的一系列方法）。
+DDD不是万能的，其缺点也很明显。
+
+### 产品层面的缺点
+
+DDD 需要领域专家、产品、开发达成一个对业务模型建模的共识，即领域知识。这个建模会很大程度上影响开发的OO建模。
+在互联网产品快速迭代的情况下，并没有很充裕的时间留给多方人员共同建模，更多情况是只有开发人员自己根据片面的对领域知识的理解，设计了编程上的模型；
+更糟糕的是，这个建模很容易被产品迭代打破，也就会进一步导致开发伤筋动骨的重构与重写已有的模型代码。
+
+### 技术层面的缺点
+
+1. DDD 依赖于聚合的完整加载，避免在数据库层面执行逻辑操作。
+但实际上，完全加载所有的数据到内存是不现实的，这种情况下难免需要在数据存储层面执行逻辑判断。
+例如判断用户历史发帖 `post` 中被加精 `selected` 的帖子数量，用于给用户颁发精品贴勋章 `badge`，这种情况下不可能把用户的所有发帖都加载到内存里再去执行判断，一定是在数据层面进行了逻辑计算 `count(selected)`。
+
+2. DDD `load` 聚合根很难做到比较好的性能表现：很难做到按需加载、不易完全并发加载，`JPA` 就是最典型的 DDD 实现，这些问题都难解决；
+3. DDD 的 `save` 数据聚合的机制在技术上不太容易实现，很难按需更新（需要实现 `dirty check`）、不易并发 `save`
+
+## DDD 与事务脚本的折衷
+
+所以，对于简单业务、业务模型不稳定、高速迭代的场景，还是使用比较薄的逻辑层（Logic）去操作 JavaBean 更为灵活，同时也不缺乏面向对象的特性。
+这种代码写起来更像是在写面向对象的C语言（Linux 系统的风格，struct + 操作该结构体的一系列方法）。
+Logic 一定是纯业务逻辑（独立于任何外部依赖，例如框架、存储等），其方法输入包含执行逻辑的必要信息，并输出期望结果。
+
+对于上面帖子加精的例子，Logic 方法的输入是：
+
+- `UserInfo` 用户信息
+- `Integer` 用户加精贴数量
+
+其返回结果是：
+
+- `Badge` 可以颁发给用户的 badge
+
+## DDD 聚合的适用场景
+
+- 客户端应用，可以加载大量信息到内存的场景
+- 业务数据量不大，且对吞吐延迟不高的配置场景
+
+
+# Ref
+
+- 《领域设计精粹》
+- [后端开发实践系列——领域驱动设计(DDD)编码实践](https://insights.thoughtworks.cn/backend-development-ddd/)
+- [使用DDD指导业务设计的一点思考](https://insights.thoughtworks.cn/ddd-business-design/)
+- [阿里云：如何写好业务代码 - 知乎回答](https://www.zhihu.com/question/60761181/answer/874296743) 
