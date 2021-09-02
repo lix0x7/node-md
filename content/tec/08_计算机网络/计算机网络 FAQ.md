@@ -1,8 +1,6 @@
 ## 四层模型、七层模型每一层是什么？做了什么？应用？
 
-
 下面这张图需要注意的几个协议：
-
 
 - 应用层
 HTTP(80)、FTP(20数据端口，21控制端口)、SSH(22)、HTTPS(443)
@@ -12,9 +10,11 @@ SSL/LDAP
 **ARP**属于网络层协议，下图有错。仔细想想ARP的作用是通过IP获取MAC地址，不可能只工作在数据链路层。
 IP ICMP IGMP
 
-
-
 ![](https://cdn.nlark.com/yuque/0/2019/png/657413/1576165161165-45e80071-67e6-4bb8-9cf2-63e1ee1a3e5e.png#align=left&display=inline&height=1588&margin=%5Bobject%20Object%5D&originHeight=1588&originWidth=1120&size=0&status=done&style=none&width=1120)
+
+## TCP 状态机
+
+![](assets/2021-09-02-iSZxdS.png)
 
 
 ## TCP/UDP区别？
@@ -107,20 +107,14 @@ IP ICMP IGMP
 
 ## TIME_WAIT是什么？为什么要有TIME_WAIT？TIME_WAIT状态的连接过多会怎么样？怎么解决TIME_WAIT过多的问题？
 
-
 TIME_WAIT：断开连接的**客户端**在返回最后的ACK报文后，需要等待一段固定时间再关闭连接，这段时间客户端就会处于TIME_WAIT的状态。
-
 
 存在的意义？本质上是为了正常断开连接，目的有二：
 
-
 1. 释放资源（端口、内存等，主要是服务端的），否则新的SYN报文会被拒绝
-1. 确认连接真的断开了，防止上一个连接延迟在网络中的报文对下一个连接产生影响（虽然概率不大）
-
-
+2. 确认连接真的断开了，防止上一个连接延迟在网络中的报文对下一个连接产生影响（虽然概率不大）
 
 过多会怎样？大量端口资源被占用，从而导致新连接无端口可用，请求并发数收到很大限制。
-
 
 解决方案？手动设置中降低TIME_WAIT的时间；或者开启TIME_WAIT状态的端口重用或快速回收，但是这样好像会导致一些[未知的问题](https://www.cnxct.com/coping-with-the-tcp-time_wait-state-on-busy-linux-servers-in-chinese-and-dont-enable-tcp_tw_recycle/)。
 
