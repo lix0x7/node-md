@@ -334,15 +334,16 @@ class Project{
 
 - 四层模型：
   - Controller：参数提取、校验、返回结构组装
-  - Service：本服务（核心业务逻辑）与外部服务（通知、订单等）与服务间的协调调用
-    - **Biz：核心业务逻辑，仅由Service调用**
+  - Service：本服务用例逻辑、外部服务（通知、订单等）与服务间的协调调用、repo的数据加载与保存
+    - **Logic：核心业务逻辑、数据变化、事件生成，仅由Service调用**
   - **[ Repo ]：可选，组装不同DAO读取的数据实体**
   - Dao：原始的数据输入组件
 - 六边形架构：领域对象位于中心，周围是 `Input / Output Adapter`，所有除了领域核心逻辑的部分都是在「适配」外部输入、输出，如下图：
 
   ![image.png](https://cdn.nlark.com/yuque/0/2020/png/657413/1603939654655-7352f2a6-2274-4a16-ad01-638c60986564.png#align=left&display=inline&height=752&margin=%5Bobject%20Object%5D&name=image.png&originHeight=752&originWidth=1100&size=947781&status=done&style=none&width=1100)
 
-其核心要义在于，Biz 或者领域对象，一定可以独立于框架（Spring等）存在，并且可以独立的进行测试。四层模型也是六边形架构的一种特例，可以看做只包含一个输出适配器（转换成controller可用的VO）和一个输入适配器（转换成dao可用的PO）的六边形架构。
+其核心要义在于，Logic 或者领域对象，一定可以独立于框架（Spring等）存在，并且可以独立的进行测试。四层模型也是六边形架构的一种特例，可以看做只包含一个输出适配器（转换成controller可用的VO）和一个输入适配器（转换成dao可用的PO）的六边形架构。
+注意区分一个业务逻辑中的用例逻辑与领域对象逻辑，避免领域对象逻辑包含了太多的用例逻辑。
 
 不同与上述思想，使用函数式编程：通过数据管道操作同一个对象，此时需要保证每一个管道组成部分都可以独立运作并测试。
 
