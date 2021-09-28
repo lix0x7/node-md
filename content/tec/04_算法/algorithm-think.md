@@ -23,6 +23,6 @@
 
 - 可以用排序解题，而且允许额外空间的情况下，记得桶排序的 `O(N)` 复杂度，例如：[https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/)
 
-- 递归问题记得先写终止条件和基础解，再写递归的部分
+- 递归问题记得先写**终止条件**和**基础解**，再写递归的部分
 
 - 递归的优化：剪枝、备忘录
