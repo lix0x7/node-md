@@ -140,6 +140,7 @@ macOS 的优点：
 - 色域
 - 配合其硬件带来的优秀的触摸板体验
 - 和生态内组件的联动，例如 iCloud、note、iPhone、airpods 等
+- 默认的 UI 组件比 windows 和 linux 桌面环境都好很多
 
 其缺点在于：
 - Unix-like 既是优点也是缺点，毕竟不完全是 Linux
