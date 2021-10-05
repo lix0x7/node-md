@@ -124,11 +124,11 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 | ctrl + / | 注释、取消注释 |  |
 | ctrl + r | 重构 |  |
 | ctrl + shift + f | 在目录中查找 |  |
-| ctrl + shif + r (refactor) | 重构 - 重命名（修改 函数、变量、类、文件 名） |  |
+| ctrl + shift + r (refactor) | 重构 - 重命名（修改 函数、变量、类、文件 名） |  |
 | ctrl + p | 参数提示 |  |
 | alt + enter | context action |  |
 | ctrl + space
- | intellisense |  |
+| intellisense |  |
 | ctrl + [ | 操作记录中的前一个光标位置 |  |
 | ctrl + ] | 操作记录中的后一个光标位置 |  |
 | ctrl + ⬅️ | 光标到前一个单词 | 再增加shift键实现选中功能。macOS平台默认为 `option+left`，需要通过改键映射 |
