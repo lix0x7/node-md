@@ -101,6 +101,10 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
 - `db.collection.find({})`
 
 
+# iTerm
+
+`cmd + shift + i`: 复制输出到所有 console，再次输入取消
+
 # keymaps
 
 对于 `ctrl+left`这类快捷键，使用系统级改键的方式实现而不是修改每一个软件的快捷键是出于如下考虑：这是一个系统级的操作，去逐一修改软件是不现实的，大多软件以此为默认操作，并且不提供修改方式。
