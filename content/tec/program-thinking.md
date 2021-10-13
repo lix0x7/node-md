@@ -551,11 +551,12 @@ ref: [https://github.com/donnemartin/system-design-primer#how-to-approach-a-syst
 业务、项目、代码根据如下这个顺序来命名字段，降低思考负担。
 
 - 业务：例如 blog / shop
-- 环境：例如 prod / test
 - 服务类型：例如 server / gw / fe，分别代表后端服务、网关（接入层）、前端服务
+- 环境：例如 prod / gray / test
 - 子域：例如 article / feed / user
 - 聚合根 / 实体：例如 timeline
 - 属性：例如 id / type / status / isDelete / createBy
+- 方法名：`<动词><对象><状语>`
 - 数据库字段
     - 实例名：与业务名相同
     - 表名：与聚合根相同
