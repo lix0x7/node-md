@@ -709,9 +709,9 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 上述监控的维度应至少包含：
 - env: 环境
 - caller: 主调服务
-- caller_ip: 主调 ip
+  - caller_ip: 主调 ip
 - callee: 被调服务
-- callee_ip: 被调 ip
+  - callee_ip: 被调 ip
 - path: 访问路径
 - status: 返回的业务状态码
 - is_timeout: 是否超时
