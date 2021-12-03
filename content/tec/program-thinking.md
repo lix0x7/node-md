@@ -585,7 +585,10 @@ ref: [https://github.com/donnemartin/system-design-primer#how-to-approach-a-syst
 
 
 ## 表主键使用 `表名+id`
+
 例如，project 表使用 `project_id` 作为主键，而非直接使用 `id` ，这样更清晰。相关讨论见 [StackOverFlow - Is it better to name the primary key column id or *_id?](https://stackoverflow.com/questions/6469730/is-it-better-to-name-the-primary-key-column-id-or-id)
+
+中间关联表的主键可以使用 `id`，因为该字段无实意。
 
 
 ## 代码分段与排版规范
@@ -671,7 +674,7 @@ public class MetaData {
 - 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, rsp: {}, cost: 123ms` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response` 
 - access日志维持特定格式，方便后期解析分析与统计。例如：统计近七天访问下游某服务的平均耗时与超时比例
 - 预留 API 动态调整日志级别
-- 对于Java框架中的日志，记得补充线程池调用缺少的MDC信息，例如：
+- 对于Java框架中的日志，记得补充线程池调用缺少的MDC信息，log4j2可以直接配置`isThreadContextMapInheritable=true`属性，例如：
 ```java
 final Map<String, String> mainMdcContext = MDC.getCopyOfContextMap();	// org.slf4j.MDC
 try {
@@ -735,3 +738,5 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 需要注意的是很多应用会预分配内存（例如 JVM），此时内存阈值应当适当调高到85%。但对于不会预分配内存的，内存阈值应当保守些，设置为60%，否则可能在雪崩的情况下留给开发者解决系统异常的时间过短。
 
 Ref: [SRE](./28_分布式、架构与云原生/SRE.md)
+
+## 时间规范 ISO8601
