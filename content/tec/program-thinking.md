@@ -234,12 +234,11 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 - 监控告警
 
 DevOps 实际上是开发监控优化的循环：
-
-![](assets/2021-07-08-git-lab-dev-lifecycle.png)
+<img src='https://note-asset-1251562845.cos.ap-beijing.myqcloud.com/2022/01/20220106191002-2021-07-08-git-lab-dev-lifecycle.png' alt='20220106191002-2021-07-08-git-lab-dev-lifecycle'/>
 
 上述循环中的开发阶段对应到 DevOps 上可以细化为如下过程：
 
-![](assets/2021-07-08-git-lab-devops.png)
+<img src='https://note-asset-1251562845.cos.ap-beijing.myqcloud.com/2022/01/20220106191116-wtranK.jpg' alt='20220106191116-wtranK'/>
 
 ref: https://docs.gitlab.com/ee/ci/introduction/
 
