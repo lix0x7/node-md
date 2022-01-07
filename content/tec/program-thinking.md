@@ -161,8 +161,8 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 
 工程编码中的每一个环节都可以作为代码仓库的一部分维护起来，包括但不仅限于：
 
-- Infra as Code: Kubernetes / Helm
-- Pipeline as Code: CI
+- Infra as Code: Kubernetes / Kustomize / Flux
+- Pipeline as Code
 - Configuration as Code
 - Document as Code
 - Monitor as Code
@@ -617,6 +617,7 @@ public class MetaData {
     
     // -------------------------------------------------
     // getters / setters / equals / hashCode
+    // 用lombok简化
     // -------------------------------------------------
     
 }
