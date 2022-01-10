@@ -13,7 +13,7 @@
 ![](https://miro.medium.com/max/2258/1*vca4e-SjpzSL5H401p4LCg.png)
 
 # k8s
-
+官方的备忘单很完整：[kubectl 备忘单 | Kubernetes](https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/)
 
 # gcc
 
