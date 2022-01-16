@@ -13,6 +13,15 @@
 ![](https://miro.medium.com/max/2258/1*vca4e-SjpzSL5H401p4LCg.png)
 
 # k8s
+
+主要命令备忘如下：
+
+- 根据文件配置资源：`kubectl apply -f resource.yml`
+- 查看pods列表： `kubectl get pods`
+- 查看deployments列表：`kubectl get deployments`
+- 查看deployments详情：`kubectl describe deployment <deplyoment-name>`
+
+
 官方的备忘单很完整：[kubectl 备忘单 | Kubernetes](https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/)
 
 # gcc
