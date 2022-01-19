@@ -187,12 +187,17 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 标签系统中，领域和属性应该是两个基本的标签维度。例如 `#打车 ` `#pojo`，在该基础上再去衍生更多的标签。
 
 ## 评价一个架构的维度
+
 - 性能：响应时间、吞吐量
 - 可用性：自愈能力
 - 伸缩性
 - 扩展性
 - 安全性
 - 可观测性
+- 易开发&部署
+- 易测试
+
+推荐好文：[Software architecture patterns – O’Reilly](https://www.oreilly.com/content/software-architecture-patterns/)
 
 
 # 编码实践
