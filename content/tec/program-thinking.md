@@ -823,11 +823,10 @@ spec:
             periodSeconds: 6
             successThreshold: 1
             timeoutSeconds: 5
-          # 存活检查：用于检测容器是否存活
+          # 存活检查：用于检测容器是否存活，整体设置应比就绪检查宽松一些
           # 如果容器的存活检查失败，集群会对该容器执行重启操作；若容器的存活检查成功则不执行任何操作。
           livenessProbe:
-            # 存活检查的启动延迟应设置的稍长一些
-            # 否则容器尚未启动成功便会被启动检查判定为启动失败后kill，导致pod永远启动不成功
+            # 存活检查的启动延迟应设置的稍长一些，否则容器尚未启动成功便会被启动检查判定为启动失败后kill，导致pod永远启动不成功
             initialDelaySeconds: 180  
             failureThreshold: 5
             httpGet:
@@ -839,7 +838,7 @@ spec:
             timeoutSeconds: 5
   updateStrategy:
     type: RollingUpdate
-    # 更新阶段允许容器数量超出配置值的比例，调大可以提升更新速度
+    # 更新阶段允许容器数量超出配置值的比例，调大可以提升更新、扩容速度
     maxSurge: 50%
     # 更新阶段允许容器不可用的比例，保证更新期间服务容量不出现过大变化导致雪崩
     maxUnavailable: 25%
