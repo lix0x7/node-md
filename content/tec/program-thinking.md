@@ -792,3 +792,59 @@ Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 Ref: [SRE](./28_分布式、架构与云原生/SRE.md)
 
 ## 时间规范 ISO8601
+
+## k8s 配置规范
+
+如下配置请额外注意，涉及到服务可用性
+```yaml
+apiVersion: platform.stke/v1alpha1
+kind: StatefulSetPlus
+metadata:
+  # ...
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            # ...
+          name: main
+          image: 'moss-formal:3.9.1-2-da0d6cb5'
+          imagePullPolicy: Always
+          # 就绪检查：判定容器是否可以开始接收用户流量
+          # 如果检查失败则会从流量入口（service、ingress）剔除容器，但不会重启容器
+          readinessProbe:
+            # 就绪检查可以将启动延迟配置为0，只要服务ready，便立刻可以对外提供服务
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            httpGet:
+              path: /health_check
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 6
+            successThreshold: 1
+            timeoutSeconds: 5
+          # 存活检查：用于检测容器是否存活
+          # 如果容器的存活检查失败，集群会对该容器执行重启操作；若容器的存活检查成功则不执行任何操作。
+          livenessProbe:
+            # 存活检查的启动延迟应设置的稍长一些
+            # 否则容器尚未启动成功便会被启动检查判定为启动失败后kill，导致pod永远启动不成功
+            initialDelaySeconds: 180  
+            failureThreshold: 5
+            httpGet:
+              path: /health_check
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 6
+            successThreshold: 1
+            timeoutSeconds: 5
+  updateStrategy:
+    type: RollingUpdate
+    # 更新阶段允许容器数量超出配置值的比例，调大可以提升更新速度
+    maxSurge: 50%
+    # 更新阶段允许容器不可用的比例，保证更新期间服务容量不出现过大变化导致雪崩
+    maxUnavailable: 25%
+    rollingUpdate:
+      partition: 0
+status:
+  # ...
+```
