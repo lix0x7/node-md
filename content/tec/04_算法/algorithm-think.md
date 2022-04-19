@@ -10,25 +10,28 @@
 
 - 涉及到 `O(N)` 空间占用的题目，考虑是否需要完整存储所有信息，还是只需要存储上一个信息即可，最典型的便是状态压缩 DP。另一种情况是，有些链表或树的题目，我们需要知道当前节点的父节点是什么，但其实我们并不需要将其转换为双向链表、带父节点引用的树，而只是需要一个 `prev` 变量记录下上一次的节点是哪个即可
 
-- 当使用到字符串子串的时候，可以不使用s.slice去真的获取子串，可以使用left、right标记子串的左右位置，节约空间与时间。
+- 当使用到字符串子串的时候，可以不使用 s.slice 去真的获取子串，可以使用 left、right 标记子串的左右位置，节约空间与时间。
 
 - 二叉搜索树（BST）的中序遍历就是有序输出
 - 访问数组下标时候确认没有越界
 
-- TopK问题中，取最大的K个元素，需要维护一个K大小的**小顶堆**，堆顶元素即为TopK中的最小的那个元素。需要注意的是入堆操作：
+- TopK 问题中，取最大的 K 个元素，需要维护一个 K 大小的**小顶堆**，堆顶元素即为 TopK 中的最小的那个元素。需要注意的是入堆操作：
    - 堆未满：追加数据到堆尾，然后上浮到合适位置
    - 堆满时：当待插入元素大于当前堆顶元素时，使用当前元素替换堆顶数据，然后下沉堆顶元素到合适位置
    - 对于堆排序问题，堆是无限大的，所以永远当做堆未满处理即可
 
-- TopK用堆 `O(NlgK)` ； `the k-th` 用快排思想 `O(lgN)` 
+- TopK 用堆 `O(NlgK)` ； `the k-th` 用快排思想 `O(lgN)`
 
-- 可以用排序解题，而且允许额外空间的情况下，记得桶排序的 `O(N)` 复杂度，例如：[https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/)
+- 可以用排序解题，而且允许额外空间的情况下，记得桶排序的 `O(N)` 复杂度，例如： [https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/](https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/kong-jian-huan-shi-jian-by-a-bai-155-hnm5/)
 
 - 递归问题记得先写**终止条件**和**基础解**，再写递归的部分
 
 - 递归的优化：剪枝、备忘录
 
+- 如果需要特殊处理链表的头节点，不妨设置一个新的头节点，将原头节点设置为这个新头节点的 next，这样就不需要特殊处理头节点了，但始终要记得真正的头节点是 lt19，删除倒数第 N 个节点
+
+- 链表常用的几个变量，prev、cur、next，参考反转链表
+
 # 题目单
 - 快排
 - 堆排
-
