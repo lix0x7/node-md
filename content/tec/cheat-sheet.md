@@ -98,11 +98,12 @@ ref: [https://man7.org/linux/man-pages/man1/gcc.1.html](https://man7.org/linux/m
   - -o 仅输出匹配部分
   - -e 正则匹配
   - -v 仅输出不匹配部分
-- `netstat -apno`
+- `netstat -anlp
   - -a all
   - -p 打印关联的进程
   - -n 显示 ip 而非域名
   - -o 显示 timer 列，显示长短连接和长连接保活时间
+  - -l 仅打印 listen 的端口
 - `ps -eLf`
   - -e 打印所有进程
   - -L 打印线程信息
