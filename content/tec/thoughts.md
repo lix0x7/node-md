@@ -550,6 +550,14 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
 
 悲观锁假设争用发生的可能性很大，所以会先加锁再执行操作。
 
+## 学习新知识是渐进性的过程
+
+以学习k8s为例
+
+1. 使用：使用kubectl和yaml文件配置一个deployments出来。不知道怎么用就去看源码没有任何意义
+2. 抓住**主要矛盾**、了解各种业务case的主要逻辑：了解这个创建deployments过程中发生了什么事情，例如写入数据到ETCD、API Server通知、kubelet拉起业务容器、Readiness检查通过后容器状态置位running
+3. 探究**次要矛盾**，了解支撑运行的周边逻辑：例如ETCD是什么、API Server和其他组件的通信机制、Readiness检查的实现、如何扩展新的CRD等引申话题
+
 
 # 模板
 
