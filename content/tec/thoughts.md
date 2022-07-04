@@ -215,6 +215,16 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 
 推荐好文：[Software architecture patterns – O’Reilly](https://www.oreilly.com/content/software-architecture-patterns/)
 
+## 学习新语言时是在学习什么？
+
+- 语法
+- 语言哲学
+- 语言特性
+- 标准库
+- 生态
+
+> 不能影响到你的编程思维方式的编程语言不值得去学习和使用
+> - 首届图灵奖得主、著名计算机科学家Alan J. Perlis
 
 # 编码实践
 
