@@ -624,7 +624,7 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
 1.  编写业务逻辑
 1.  编写单元测试
 
-## 做一个系统架构设计的顺序与思考
+## System Design
 
 1.  描述用户使用场景、限制条件和前提假设
    1.  目标用户
@@ -635,7 +635,7 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
    1.  实时性要求？
 2.  简单画一下系统架构图与关键组件，描绘数据流向
 2.  设计并编码技术细节
-2.  优化与 Scalability：缓存、数据库分片、读写分离、负载均衡、水平扩容等
+2.  优化与 Scalability：缓存、读写分离、数据库分片、负载均衡、水平扩容等
 
 ref: [https://github.com/donnemartin/system-design-primer#how-to-approach-a-system-design-interview-question](https://github.com/donnemartin/system-design-primer#how-to-approach-a-system-design-interview-question)
 
