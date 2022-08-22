@@ -515,7 +515,10 @@ MyBatis 以数据库表为核心，Java 对象只是承载数据的 POJO，一�
 
 ref: https://nodejs.org/api/url.html#url_url_strings_and_url_objects
 
-## 什么时候需要接口？一种抽象，多种实现
+## 什么时候需要接口？
+
+1. 一种抽象，多种实现
+2. 对外屏蔽内部复杂度，接口简单但实现复杂，例如Facade
 
 ## 常用延迟数值 Latency Number
 
