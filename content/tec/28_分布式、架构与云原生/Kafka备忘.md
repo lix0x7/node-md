@@ -2,12 +2,20 @@ Kafka备忘
 
 # 关键词
 
-核心组件：
+两种模式：
+- 点对点（P2P）：生产消费一对一
+- 发布订阅（Pub/Sub）：生产消费一对多广播
+
 - producer
+    - acks: 多少个ISR中的副本写入才认为消息写入成功，0 - 不需要确认， 1 - leader写入即可， all 全部副本都写入（但当ISR中只有leader时仍然可能丢消息，需要配合）。
 - consumer
+    - consumer group:
+        - 每一个分区只能被一个消费者组的一个消费者消费
+        - 可以通过增加消费者组中的消费者数量来提高并发量，但是消费者数量不能大于分区数量，否则就会有消费者分配不到任何分区
 - broker
 - zookeeper
 
+- topic
 - partition
 - replica
     - Leader
@@ -20,6 +28,8 @@ Kafka备忘
 
 
 # FAQ
+
+## 如何保证消息不丢
 
 ## 如何实现延迟消息
 
