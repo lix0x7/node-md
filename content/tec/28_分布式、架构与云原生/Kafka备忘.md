@@ -31,6 +31,14 @@ Kafka备忘
 
 # FAQ
 
+## 消息发送消费流程
+
+```
+producer.send() -> producer -> producer interceptor -> producer serializer 
+
+-> consumer.poll() -> consumer deserializer -> consumer interceptor -> consume
+```
+
 ## 如何保证消息不丢
 
 ## 如何避免重复消费
