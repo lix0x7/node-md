@@ -26,10 +26,14 @@ Kafka备忘
 - HW: High Watermark
 - LEO: Log End Offset LEO是Log End Offset的缩写，它标识当前日志文件中下一条待写入消息的offset，LEO的大小相当于当前日志分区中最后一条消息的offset值加1。分区ISR集合中的每个副本都会维护自身的LEO，而ISR集合中最小的LEO即为分区的HW，对消费者而言只能消费HW之前的消息
 
+- 再均衡
+
 
 # FAQ
 
 ## 如何保证消息不丢
+
+## 如何避免重复消费
 
 ## 如何实现延迟消息
 
