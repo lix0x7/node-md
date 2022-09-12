@@ -12,6 +12,7 @@ Kafka备忘
     - consumer group:
         - 每一个分区只能被一个消费者组的一个消费者消费
         - 可以通过增加消费者组中的消费者数量来提高并发量，但是消费者数量不能大于分区数量，否则就会有消费者分配不到任何分区
+    - `__consumer_offset`
 - broker
 - zookeeper
 
@@ -28,6 +29,7 @@ Kafka备忘
 
 - 再均衡
 - Broker Controller
+- 墓碑消息: key不为空，但是value为空的消息
 
 
 # FAQ
@@ -76,6 +78,14 @@ producer.send() -> producer -> producer interceptor -> producer serializer
 -> consumer.poll() -> consumer deserializer -> consumer interceptor -> consume
 ```
 
+## 三种消息传输保障级别
+
+- `at most once`
+- `at least once`
+- `exactly once`
+
+kafka通过幂等的方式可以保证 `exactly once`，但这个语义仅限于单producer、单分区。简单地说，producer会为每条消息生成单调递增的序列号`seq`，消费者在消费一条消息后会将消费序列号`seq_old`保存下来，下次消费时仅接受`seq_old + 1`序列号的消息，由此避免了重复消费和消息丢失。
+
 ## 如何保证消息不丢
 
 ## 如何避免重复消费
@@ -83,3 +93,15 @@ producer.send() -> producer -> producer interceptor -> producer serializer
 ## 如何实现延迟消息
 
 ## 如何实现死信队列
+
+## Kafka中的事务消息？
+
+而 Kafka 事务消息则是用在一次事务中需要发送多个消息的情况，保证多个消息之间的事务约束，即多条消息要么都发送成功，要么都发送失败，就像下面代码所演示的。
+
+![](.Kafka备忘.assets/2022-09-12-21-53-39.png)
+
+Kafka事务消息中的事务指的多个消息发送形成一个事务，并不是直觉上的「将消息发送这个步骤纳入业务事务中（具体来说就是DB事务）」，RocketMQ事务消息解决才是本地事务的执行和发消息这两个动作满足事务的约束。
+
+# 最佳实践
+
+## 仅作为触发时间，业务数据仍然实时读取
