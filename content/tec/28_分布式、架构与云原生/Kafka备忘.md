@@ -52,9 +52,9 @@ todo
 
 ## 零拷贝
 
-常规 disk -> kernel cache -> user space -> socket buffer -> nic buffer
+常规 `disk -> kernel cache -> user space -> socket buffer -> nic buffer`
 
-零拷贝 disk -> kernel cache -> nic buffer
+零拷贝 `disk -> kernel cache -> nic buffer`
 
 ## Broker Controller
 
@@ -63,6 +63,10 @@ todo
 控制器是通过broker启动时抢先注册ZooKeeper上的`/controller`节点实现的，先注册成功的节点便会成为broker controller
 
 ![](.Kafka备忘.assets/2022-09-12-17-23-32.png)
+
+## ZooKeeper 节点
+
+![与消费者消费相关的节点](.Kafka备忘.assets/2022-09-12-21-09-12.png)
 
 ## 消息发送消费流程
 
