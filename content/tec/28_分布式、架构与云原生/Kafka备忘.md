@@ -23,13 +23,46 @@ Kafka备忘
     - ISR(In-Sync Replicas)：同步中的副本，仍然可能会有一定程度的滞后
     - OSR(Out-Sync Replicas): 滞后过多的副本
 
-- HW: High Watermark
+- HW: High Watermark，消费者可消费的最大消息偏移量
 - LEO: Log End Offset LEO是Log End Offset的缩写，它标识当前日志文件中下一条待写入消息的offset，LEO的大小相当于当前日志分区中最后一条消息的offset值加1。分区ISR集合中的每个副本都会维护自身的LEO，而ISR集合中最小的LEO即为分区的HW，对消费者而言只能消费HW之前的消息
 
 - 再均衡
+- Broker Controller
 
 
 # FAQ
+
+## 性能优秀的关键
+
+kafka性能关键
+- 顺序追加写日志文件
+- 大量利用操作系统页缓存，避免实际io
+- 零拷贝
+- 基于tcp的二进制协议
+
+## 日志文件结构
+
+![](.Kafka备忘.assets/2022-09-12-17-03-10.png)
+
+todo
+
+## 消息格式
+
+
+
+## 零拷贝
+
+常规 disk -> kernel cache -> user space -> socket buffer -> nic buffer
+
+零拷贝 disk -> kernel cache -> nic buffer
+
+## Broker Controller
+
+控制器负责监听ZooKeeper上各种事件，从而触发诸如副本Leader选举、ISR变化时通知broker更新元数据、再分区等操作。
+
+控制器是通过broker启动时抢先注册ZooKeeper上的`/controller`节点实现的，先注册成功的节点便会成为broker controller
+
+![](.Kafka备忘.assets/2022-09-12-17-23-32.png)
 
 ## 消息发送消费流程
 
