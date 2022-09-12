@@ -234,7 +234,3 @@ truncate要比同样目的的delete快一些，但**不能回滚**，不会触�
 - Geo
 - HyperLogLog
 
-
-
-
-
