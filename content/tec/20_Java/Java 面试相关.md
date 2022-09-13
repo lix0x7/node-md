@@ -288,7 +288,9 @@ AQS已经实现了一些顶层基础方法：
 
 
 - `acquire(int)`
-负责获取资源、入队操作。```java
+负责获取资源、入队操作。
+
+```java
 public final void acquire(int arg) {
 	if (!tryAcquire(arg) &&
 		acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
@@ -348,7 +350,9 @@ final boolean acquireQueued(final Node node, int arg) {
 ![](https://cdn.nlark.com/yuque/0/2019/png/657413/1576165098855-5dceae9c-2f37-49f3-8f50-59da145db96e.png#align=left&display=inline&height=232&margin=%5Bobject%20Object%5D&originHeight=232&originWidth=1076&size=0&status=done&style=none&width=1076)
 
 - `release(int)`
-负责释放资源、唤醒队列中的后继线程。```java
+负责释放资源、唤醒队列中的后继线程。
+
+```java
 public final boolean release(int arg) {
     if (tryRelease(arg)) {
         Node h = head;
@@ -392,14 +396,7 @@ private void unparkSuccessor(Node node) {
 详情参考源码和这篇文章：[从ReentrantLock的实现看AQS的原理及应用](https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html)。
 
 
-### synchronized实现？
-
-
-对应到字节码上是`monitorenter`/`monitorexit`两条指令，分别代表着使当前线程获取到对象的锁和释放对象的锁，其机制基于监视器，具体实现是通过控制对象头的`Mark Word`实现的。
-
-
 ### synchronized作用对象？
-
 
 类静态方法（类锁）、类（类锁）、实例方法（对象锁）、实例（对象锁）
 
@@ -438,7 +435,6 @@ synchronized可以自动获取释放，ReentrantLock需要手动释放，如果�
 - 锁消除：JVM编译优化，将不存在竞争的锁消除
 
 
-
 ### 轻量级锁和重量级锁是什么？锁膨胀过程是怎样的？
 
 
@@ -453,7 +449,7 @@ synchronized可以自动获取释放，ReentrantLock需要手动释放，如果�
 3. CAS写入成功，表明当前线程拥有了该对象的锁，此时将对象的锁定状态修改为轻量级锁`00`
 4. CAS写入失败，JVM先检查当前线程是否已经获得了轻量级锁，如果有则继续执行；如果没有，则表明发生了冲突，此时进行锁膨胀将轻量级锁升级为重量级锁，即将锁定状态置为重量级锁`10`
 
-
+![](.Java%20面试相关.assets/2022-09-13-22-50-48.png)
 
 ### 偏向锁实现？
 
@@ -629,24 +625,17 @@ resize过程（ConcurrentHashMap中称为Transfer）：resize思想同HashMap，
 
 ### volatile 的两个特性？底层实现（具体到x86汇编）？
 
-
-volatile有两个特性：
-
+volatile解决的是线程之间可见性的问题，有两个特性：
 
 - 立即可见
 - 禁止指令重排序
 
-
-
 在 JVM 层面，禁止指令重排序就是一项 happens-before 原则的具体体现，通过内存屏障实现。happens-before 规定：对 volatile 变量的写操作一定在读操作之前。
-
 
 在 x86 层面，JIT 会在编译 Java 字节码时，如果检测到了变量有 volatile 修饰，则会在写操作前添加 lock 指令（体系结构级别的内存屏障），这个指令有如下两个作用（其实 JVM 做的事情和 CPU 是相同的）：
 
-
 - 将当前缓存的值立刻写回主内存
 - 使所有 CPU 里其他涉及到该内存地址的缓存无效
-
 
 
 参考[聊聊并发（一）——深入分析 Volatile 的实现原理](https://infoq.cn/article/ftf-java-volatile)
@@ -654,6 +643,12 @@ volatile有两个特性：
 
 ### 如何中断线程？interrupt做了什么？
 
+
+### 并发编程三大特性？
+
+- 原子性
+- 可见性：volatile
+- 有序性
 
 ## JVM
 
@@ -675,7 +670,9 @@ JMM是一个定义了Java内存行为的规范，目标是去除Java运行在不
 
 ### JVM内存结构？
 
-五个主要部分：程序计数器、虚拟机栈、本地方法栈、方法区、堆区；堆区在具体实现的时候又会分为老年代、新生代，以实现不同的垃圾回收算法。
+JDK 8之后的版本有五个主要部分：程序计数器、虚拟机栈、本地方法栈、元空间、堆区；堆区在具体实现的时候又会分为老年代、新生代，以实现不同的垃圾回收算法。
+
+![](.Java%20面试相关.assets/2022-09-13-23-07-45.png)
 
 
 ### GC如何确定要被回收的对象？
@@ -691,8 +688,8 @@ JMM是一个定义了Java内存行为的规范，目标是去除Java运行在不
 
 - 虚拟机栈帧中本地变量表引用的对象
 - 本地方法栈中Native方法引用的对象
-- 方法区中类静态属性引用的对象
-- 方法区中常量引用的对象
+- 元空间中类静态属性引用的对象
+- 元空间中常量引用的对象
 
 
 
@@ -1148,24 +1145,18 @@ public enum Singleton{
 
 ## 为什么上面的双重检查的方法要使用volatile关键字？
 
-
 JVM创建对象分为三个阶段：
-
 
 1.栈上分配引用空间、堆上分配内存空间
 2.初始化对象
 3.将引用指向堆上对象
 
-
 后两步可能会被重排序，那么假若此时有线程B对调用Singleton.getInstance方法，那么在第一次检查时会认为引用已经存在并返回了这个引用，但是此时返回的引用指向的对象还未完全初始化，例如某些字段值还未初始化完毕。这样的对象处于不确定的状态，此时如果调用这个不确定状态的对象则会抛出异常。
-
 
 但双重检查已经是一种过时的方法（Java 并发编程实践在 2006 年、甚至更早就提到了），主要因为以下两个原因：
 
-
 1. JVM 低竞争状态下的同步消耗已经由于 JVM 1.5 版本后的优化降低很多，不需要应用层考虑太多争用同步消耗的问题
 2. 语义上，双重检查锁定比内部类不易于理解。
-
 
 
 ## 为什么使用内部类静态变量可以实现单例模式？
