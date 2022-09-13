@@ -403,6 +403,16 @@ private void unparkSuccessor(Node node) {
 
 类静态方法（类锁）、类（类锁）、实例方法（对象锁）、实例（对象锁）
 
+### synchronized实现原理
+
+通过JVM中的monitor实现的，相关JVM字节码操作为`monitorenter` / `monitorexit`。
+
+在 Java 虚拟机(HotSpot)中，Monitor 是基于 C++实现的，由ObjectMonitor实现的。每个对象中都内置了一个 ObjectMonitor对象。
+
+另外，wait/notify等方法也依赖于monitor对象，这就是为什么只有在同步的块或者方法中才能调用wait/notify等方法，否则会抛出java.lang.IllegalMonitorStateException的异常的原因。
+
+ref: [Java 并发常见面试题总结（中） | JavaGuide](https://javaguide.cn/java/concurrent/java-concurrent-questions-02.html#%E8%AE%B2%E4%B8%80%E4%B8%8B-synchronized-%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86)
+
 
 ### ReentrantLock和synchronized异同？
 
