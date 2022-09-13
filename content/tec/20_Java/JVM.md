@@ -643,7 +643,7 @@ class Women extends Human{
 # JAVA内存模型与线程
 
 
-## Java内存模型（Java Memory Model）
+## Java内存模型（JMM, Java Memory Model）
 
 
 Java内存模型主要是定义程序中线程共享变量的访问安全，即虚拟机如何存取变量这样的底层细节
