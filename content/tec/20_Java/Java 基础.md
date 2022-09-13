@@ -836,3 +836,19 @@ DataInputStream dis =
 ```
 
 - 文本输入与输出
+
+# Unsafe
+
+概括的来说，Unsafe 类实现功能可以被分为下面 8 类：
+
+- 内存操作
+- 内存屏障
+- 对象操作
+- 数据操作
+- CAS 操作
+- 线程调度
+- Class 操作
+- 系统信息
+
+ref: [Java 魔法类 Unsafe 详解 | JavaGuide](https://javaguide.cn/java/basis/unsafe.html#unsafe-%E5%88%9B%E5%BB%BA)
+
