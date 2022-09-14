@@ -114,9 +114,14 @@ TIME_WAIT：断开连接的**客户端**在返回最后的ACK报文后，需要�
 1. 释放资源（端口、内存等，主要是服务端的），否则新的SYN报文会被拒绝
 2. 确认连接真的断开了，防止上一个连接延迟在网络中的报文对下一个连接产生影响（虽然概率不大）
 
+出现在什么场景？服务作为客户端并发度很高，并且开启了大量的短连接。
+
 过多会怎样？大量端口资源被占用，从而导致新连接无端口可用，请求并发数收到很大限制。
 
-解决方案？手动设置中降低TIME_WAIT的时间；或者开启TIME_WAIT状态的端口重用或快速回收，但是这样好像会导致一些[未知的问题](https://www.cnxct.com/coping-with-the-tcp-time_wait-state-on-busy-linux-servers-in-chinese-and-dont-enable-tcp_tw_recycle/)。
+解决方案？
+- 使用长链接，例如http中的keep-alive等
+- 手动设置中降低TIME_WAIT的时间；
+- 或者开启TIME_WAIT状态的端口重用或快速回收，但是这样好像会导致一些[未知的问题](https://www.cnxct.com/coping-with-the-tcp-time_wait-state-on-busy-linux-servers-in-chinese-and-dont-enable-tcp_tw_recycle/)。
 
 
 ## CLOSE_WAIT是什么？为什么可能出现很多CLOSE_WAIT状态？CLOSE_WAIT状态的连接过多会怎么样？怎么解决CLOSE_WAIT过多的问题？
