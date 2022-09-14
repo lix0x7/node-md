@@ -196,6 +196,47 @@ Hash索引是一个适用于随机访问的索引，不适合磁盘这类随机�
 
 // todo: redo log
 
+![](.数据库%20FAQ.assets/2022-09-14-17-35-05.png)
+
+1. 数据按页加载到内存
+2. 引擎修改页上的数据
+3. 定时刷新脏页，写回到硬盘
+
+redo log存在一个两阶段提交的机制以保证binlog和redo log的同步。
+redo log事务提交分为prepare和commit阶段，其顺序如下：
+
+1. redo log prepare
+2. binlog 写入
+3. redo log commit
+
+可以参看下图：
+
+![](.数据库%20FAQ.assets/2022-09-14-17-38-22.png)
+
+ref: [MySQL三大日志(binlog、redo log和undo log)详解 | JavaGuide](https://javaguide.cn/database/mysql/mysql-logs.html#%E5%89%8D%E8%A8%80)
+
+## 如何处理事务回滚？ undo-log
+
+// todo: undo log
+
+每一行都有三个隐藏字段：
+
+- DB_TRX_ID（6字节）：表示最后一次插入或更新该行的事务 id。此外，delete 操作在内部被视为更新，只不过会在记录头 Record header 中的 deleted_flag 字段将其标记为已删除
+- DB_ROLL_PTR（7字节） 回滚指针，指向该行的 undo log 。如果该行未被更新，则为空
+- DB_ROW_ID（6字节）：如果没有设置主键且该表没有唯一非空索引时，InnoDB 会使用该 id 来生成聚簇索引
+
+undo log 主要有两个作用：
+
+当事务回滚时用于将数据恢复到修改前的样子
+另一个作用是 MVCC ，当读取记录时，若该记录被其他事务占用或当前版本对该事务不可见，则可以通过 undo log 读取之前的版本数据，以此实现非锁定读
+
+在 InnoDB 存储引擎中 undo log 分为两种： insert undo log 和 update undo log。
+
+不同事务或者相同事务的对同一记录行的修改，会使该记录行的 undo log 成为一条链表，链首就是最新的记录，链尾就是最早的旧记录。
+
+![](.数据库%20FAQ.assets/2022-09-14-17-19-36.png)
+
+
 ## MySQL复制过程？
 
 
@@ -250,14 +291,49 @@ truncate要比同样目的的delete快一些，但**不能回滚**，不会触�
 
 
 # Redis
+
+## 为什么Redis快？
+
+- 内存型
+- 单线程无锁 + IO多路复用的Reactor模式
+- 高效的数据结构
+
+![](.数据库%20FAQ.assets/2022-09-14-17-44-22.png)
+
 ## 常用数据结构，及其使用场景？
-7 种：
+
+8 种：
 
 - String
 - Hash
 - List
 - Set
 - ZSet
+- Bitmap
 - Geo
 - HyperLogLog
 
+## Redis删除过期key机制？
+
+如果假设你设置了一批 key 只能存活 1 分钟，那么 1 分钟后，Redis 是怎么对这批 key 进行删除的呢？
+
+常用的过期数据的删除策略就两个（重要！自己造缓存轮子的时候需要格外考虑的东西）：
+
+惰性删除 ：只会在取出 key 的时候才对数据进行过期检查。这样对 CPU 最友好，但是可能会造成太多过期 key 没有被删除。
+定期删除 ： 每隔一段时间抽取一批 key 执行删除过期 key 操作。并且，Redis 底层会通过限制删除操作执行的时长和频率来减少删除操作对 CPU 时间的影响。
+
+Redis采取上述两种方案组合的方法来实现最终的过期key清除任务
+
+## Redis数据淘汰策略
+
+## Redis持久化方法？
+
+- RDB: 保存一份当前kv的数据快照，导出过程会导致redis无响应
+- AOF: 保存历史执行的指令，而且可以每秒执行，不影响redis性能
+- 混合开启 RDB+AOF: 在某个时间点之前，使用RDB记录键值，之后使用AOF，思想和key compact类似，可以压缩持久化文件的大小
+
+## Redis事务？
+
+默认的redis事务只是一种打包运行多条命令的机制，节省网络开销，但不满足原子性和持久性，而且这些命令间可以插入其他命令。
+
+一种更好的方法是将操作封装为lua脚本，可以保证这中间不会插入其他命令，但是仍然不满足原子性和持久性。
