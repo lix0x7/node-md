@@ -410,3 +410,10 @@ ref:
 ## Redis查找一个key的过程
 
 ref: [Redis源代码阅读：key的查找过程 | 毛英东的个人博客](https://www.maoyingdong.com/redis/redis_source_code_get_string_type_key/)
+
+## Redis分布式锁
+
+- `setnx`
+- redlock
+
+各自的问题？
