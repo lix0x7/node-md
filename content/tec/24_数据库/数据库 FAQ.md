@@ -289,6 +289,9 @@ truncate要比同样目的的delete快一些，但**不能回滚**，不会触�
 
 `pt-online-schema-change` 会首先建立一个与原表结构相同的新表，并且在新表上进行表结构的修改，然后再把原表中的数据复制到新表中，并在原表中增加一些触发器。把原表中新增的数据也复制到新表中，在行所有数据复制完成之后，把新表命名成原表，并把原来的表删除掉。把原来一个 DDL 操作，分解成多个小的批次进行。
 
+## 乐观锁、悲观锁？
+
+// todo
 
 # Redis
 
@@ -407,13 +410,21 @@ ref:
 - 不同的缓存设置随机过期时间
 - 热点key设置为永不过期，依赖于主动更新
 
-## Redis查找一个key的过程
+## Redis查找一个key的过程，以get为例
+
+1.`lookupKeyReadOrReply()`，查找不到就回复reply给客户端。
+	1. 判断key过期与否 & 删除过期key
+	2. 统计访问次数
+2. 查找 `dictEntry *dictFind(dict *d, const void *key)`
+	1. 如果在渐进rehash，执行一个key的rehash
+	2. 计算hash
+	3. table中找出对应entry，如果存在key冲突，需要遍历对应的value链表找到指定key
 
 ref: [Redis源代码阅读：key的查找过程 | 毛英东的个人博客](https://www.maoyingdong.com/redis/redis_source_code_get_string_type_key/)
 
 ## Redis分布式锁
 
 - `setnx`
-- redlock
+- `redlock`
 
 各自的问题？
