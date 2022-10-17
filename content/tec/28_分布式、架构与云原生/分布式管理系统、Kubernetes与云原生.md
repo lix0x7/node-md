@@ -28,10 +28,7 @@ CNCF 关于云原生给出的描述如下：
 - Linux Namespace
 - Cgroup
 
-
 > Two mechanisms make this possible. The first one, Linux Namespaces, makes sure each process sees its own personal view of the system (files, processes, network interfaces, hostname, and so on). The second one is Linux Control Groups (cgroups), which limit the amount of resources the process can consume (CPU, memory, network bandwidth, and so on).
-
-
 
 ## 容器镜像的分层
 > But layers don’t only make distribution more efficient, they also help reduce the storage footprint of images. Each layer is only stored once. Two containers created from two images based on the same base layers can therefore read the same files, but if one of them writes over those files, the other one doesn’t see those changes. Therefore, even if they share files, they’re still isolated from each other. **This works because container image layers are read-only. When a container is run, a new writable layer is created on top of the layers in the image. When the process in the container writes to a file located in one of the underlying layers, a copy of the whole file is created in the top-most layer and the process writes to the copy.**
@@ -90,7 +87,6 @@ K8s 本质上是分布式管理系统的一种实现，即管理、协调、调�
 > A pod is a group of one or more tightly related containers that will always run together on the same worker node and in the same Linux namespace(s).
 
 
-
 # Controller
 
 
@@ -107,10 +103,18 @@ K8s 本质上是分布式管理系统的一种实现，即管理、协调、调�
 
 
 
+# 网络
 
-# Ref
+## 网络方案
 
-- Kubernetes in Action (2017)
+## 网络请求通过service访问至pod时发生了什么？
+
+# Operator
+
+# ref
+
+- [自己动手写Docker (豆瓣)](https://book.douban.com/subject/27082348/)
+- [Kubernetes in Action (豆瓣)](https://book.douban.com/subject/26997846/)
 - Microservice Patterns (2017)
 - Cloud Native Patterns (2019)
 - [https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/definition](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/definition)
