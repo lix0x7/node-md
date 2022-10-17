@@ -77,7 +77,13 @@ IP ICMP IGMP
 
 其实上述两个说法都有道理，但是第一种说法也是`RFC 793`给出的原因，更权威一些：
 
+>   A three way handshake is necessary because sequence numbers are not tied to a global clock in the network, and TCPs may have different mechanisms for picking the ISN's.  The receiver of the first SYN has no way of knowing whether the segment was an old delayed one or not, unless it remembers the last sequence number used on the connection (which is not always possible), and so it must ask the sender to verify this SYN.  The three way handshake and the advantages of a clock-driven scheme are discussed in [3].
+> 
+> ...
+>
 > The principle reason for the three-way handshake is to prevent old duplicate connection initiations from causing confusion.
+>
+> ref: https://www.ietf.org/rfc/rfc793.txt
 
 所以，无论如何一定要三次握手才能保证连接的顺利进行。
 
@@ -213,20 +219,32 @@ ARP是一个根据IP地址获取物理地址的协议。流程如下：
 
 ## HTTP常见状态码？200/201/202/204/206/301/302/304/400/401/403/404/500？
 
-
+- 100 Continue：服务器已经接收到请求头，并且客户端应继续发送请求主体（在需要发送身体的请求的情况下：例如，POST请求），或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。
+- 101 Switching Protocols：服务器已经理解了客户端的请求，并将通过Upgrade消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到在Upgrade消息头中定义的那些协议。最典型的是HTTP 1.1切换至WebSocket
 - 200 OK：正常成功
 - 201 Created：请求创建的资源已创建
 - 202 Accepted：请求已接受但还未被处理，请求的操作可能并不会成功
 - 204 No Content：服务器正常处理了请求，且不需要返回信息
 - 206 Partial Content：服务端返回了部分数据，用于断点续传一类的需求
 - 301 Moved Permanently：永久重定向
-- 302 Moved Temporarily：临时重定向
+- 302 Found / Moved Temporarily：临时重定向
 - 304 Not Modified：服务器表示Get请求的对象从上次请求没有改变，可以使用缓存
 - 400 Bad Request：请求错误，语义或参数
 - 401 Unauthorized：请求需要验证身份才能继续执行
 - 403 Forbidden：服务器拒绝执行请求，与401不同的是验证信息并不能对这个请求提供帮助
 - 404 Not Found
+- 405 Method Not Allowed: 请求的HTTP方法不支持
+- 408 Request Timeout：链接建立后客户端未能在一定时间内向服务端发送请求，服务端则主动关闭链接，返回408状态码
+- 413 Request Entity Too Large：请求体过大，服务端无法处理，例如上传了过大的文件
+- 414 Request-URI Too Long：请求URI过长，服务端无法处理，一般是GET请求参数过大导致超长，需要转换为POST请求，比较少见
+- 415 Unsupported Media Type：content-type不受服务端支持
+- 429 Too Many Requests （RFC 6585）：用户在给定的时间内发送了太多的请求。旨在用于网络限速
+- 499 HTTP_CLIENT_CLOSED_REQUEST: Nginx定义的状态码，访问路径`client -> nginx -> server`中，如果ngixn从server获取到响应时client已经因超时关闭了链接，则nginx记录为499状态码，但该状态码不会返回给client
 - 500 Internal Server Error：服务器执行时发生了异常
+- 501 Not Implemented：服务端尚未实现指定功能
+- 502 Bad Gateway：网关没能成功访问到下游服务
+- 503 Service Unavailable：服务器当前不可用，稍后可能会恢复，出现在过载时
+- 504 Gateway Timeout：作为网关或者代理工作的服务器尝试执行请求时未能在有效时间内收到响应
 
 
 
@@ -249,8 +267,6 @@ HTTP2.0三个主要特性：
 - 多路复用：多个请求可以连续发送而不必一个一个等待返回，提高了并发度，通过将请求的信息封装为二进制帧实现。
 - 头部压缩：省略公共字段、字符串使用**huffman编码**
 - 服务端推送：服务端提前推送客户端可能使用到的数据，预先缓存
-
-
 
 HTTP2.0实际上已经是「有状态」协议了，每一个HTTP2.0连接（Stream）会有自己的状态机，如下：
 
@@ -304,7 +320,6 @@ RFC 7540                         HTTP/2                         May 2015
 ```
 
 服务端推送在HTTP1.1时期有一些历史实现：
-
 
 - 长连接 + 延迟应答
 服务端接收到请求后不立即应答，而是再需要推送消息时候再应答，这是一个妥协的服务端推送方案
