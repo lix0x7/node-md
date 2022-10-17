@@ -105,9 +105,25 @@ K8s 本质上是分布式管理系统的一种实现，即管理、协调、调�
 
 # 网络
 
-CNI
+Kubernetes 网络解决四方面的问题：
 
-// todo 
+1. 同节点的pod通信：一个 Pod 中的容器之间通过本地回路（loopback）通信。
+1. 跨节点的pod通信：集群网络在不同 Pod 之间提供通信。
+1. 通过Service访问pod：通过iptables配置NAT实现
+1. 集群外访问集群内Service：Service 资源允许你 向外暴露 Pod 中运行的应用， 以支持来自于集群外部的访问。Ingress 提供专门用于暴露 HTTP 应用程序、网站和 API 的额外功能。
+
+## CNI
+
+CNI全称`Container Networking Interface`，主要分为如下两部分：
+
+1. CNI Plugin为容器配置网络，主要有`AddNetwork`、`DelNetwork`两个接口
+2. IPAM Plugin负责给容器分配IP地址，主要实现包括`host-local`和`DHCP`
+
+网络插件的模式也有多种，分别侧重于灵活与性能，包括：
+
+1. Overlay模式，基于虚拟化的上层逻辑网络，好处在于它不受底层物理网络结构的约束，有更大的自由度，更好的易用性；坏处是由于额外的包头封装导致信息密度降低，额外的隧道封包解包会导致传输性能下降。典型插件为Flannel（VXLAN模式）、Calico（IPIP模式）、Weave等
+1. Underlay模式，要求容器的网络接口能够直接与底层网络进行通信，因此该模式是直接依赖于虚拟化设备与底层网络能力的，性能最好。典型插件有`MACVLAN`、`SR-IOV`
+1. 路由模式，属于 Underlay 模式的一种特例，这里将它单独作为一种网络实现模式来介绍。相比起 Overlay 网络，路由模式的主要区别在于它的跨主机通信是直接通过路由转发来实现的，因而无须在不同主机之间进行隧道封包。
 
 ## 网络方案
 
@@ -122,6 +138,11 @@ Flannel0作为overlay网络的设备，用来进行数据报文的封包和解�
 Flanneld作为agent进程运行在每个主机上，它会为所在主机从集群的网络地址空间中，获取一个小的网段subnet，本主机内所有Pod的IP地址都将从中分配，这样就可以保证集群内各个Pod的IP是唯一的。同时Flanneld监听K8s集群的数据库etcd，为Flannel0设备提供封装数据时必要的mac、ip等网络数据信息。
 
 ![](.分布式管理系统、Kubernetes与云原生.assets/2022-10-17-19-31-12.png)
+
+
+### Calico
+
+// todo
 
 ## Pod对外暴露服务的模式
 
@@ -192,3 +213,4 @@ LoadBalancer类型的Service通常和云厂商的LB结合一起使用，用于�
 - Microservice Patterns (2017)
 - Cloud Native Patterns (2019)
 - [https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/definition](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/definition)
+- [容器网络与生态 | 凤凰架构](http://icyfenix.cn/immutable-infrastructure/network/cni.html)
