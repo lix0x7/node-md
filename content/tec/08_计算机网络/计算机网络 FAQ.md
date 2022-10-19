@@ -61,21 +61,15 @@ IP ICMP IGMP
 
 ![](https://cdn.nlark.com/yuque/0/2019/png/657413/1576165183854-6c388b54-e36c-4a67-9d49-744357ecfccc.png#align=left&display=inline&height=304&margin=%5Bobject%20Object%5D&originHeight=304&originWidth=517&size=0&status=done&style=none&width=517)
 
-一种常见说法：
+为什么需要三次握手，简单来讲，是为了避免服务器接收到网络中存在延迟的重复分组从而产生半开链接。
 
 在谢希仁著《计算机网络》第四版中讲“三次握手”的目的是“为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误”。在另一部经典的《计算机网络》一书中讲“三次握手”的目的是为了解决“网络中存在延迟的重复分组”的问题。这两种不用的表述其实阐明的是同一个问题。
 
-谢希仁版《计算机网络》中的例子是这样的，“已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认。server由于收不到确认，就知道client并没有要求建立连接。”
+谢希仁版《计算机网络》中的例子是这样的
 
-另一种说法：
+> 已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认，并且应该发回RST报文，服务端便可以根据RST报文关闭对应的半开链接
 
-1. A发，B收， B知道A能发
-2. B发，A收， A知道B能发收
-3. A发，B收， B知道A能收
-
-发和收设计到了主机资源分配和网络链路上的一系列策略影响，双方彼此确认发收能力也是必要的。
-
-其实上述两个说法都有道理，但是第一种说法也是`RFC 793`给出的原因，更权威一些：
+TCP原始文档`RFC 793`给出的原因基本相同：
 
 >   A three way handshake is necessary because sequence numbers are not tied to a global clock in the network, and TCPs may have different mechanisms for picking the ISN's.  The receiver of the first SYN has no way of knowing whether the segment was an old delayed one or not, unless it remembers the last sequence number used on the connection (which is not always possible), and so it must ask the sender to verify this SYN.  The three way handshake and the advantages of a clock-driven scheme are discussed in [3].
 > 
@@ -85,7 +79,7 @@ IP ICMP IGMP
 >
 > ref: https://www.ietf.org/rfc/rfc793.txt
 
-所以，无论如何一定要三次握手才能保证连接的顺利进行。
+所以，无论如何一定要三次握手才能保证连接的顺利进行，并且不产生资源浪费。
 
 如果A发给B的确认丢了，该如何？A会超时重传这个ACK吗？不会！TCP不会为没有数据的ACK超时重传。
 
@@ -132,18 +126,13 @@ TIME_WAIT：断开连接的**客户端**在返回最后的ACK报文后，需要�
 
 ## CLOSE_WAIT是什么？为什么可能出现很多CLOSE_WAIT状态？CLOSE_WAIT状态的连接过多会怎么样？怎么解决CLOSE_WAIT过多的问题？
 
-
 CLOSE_WAIT：**服务端**在接收到发送方的FIN报文后，如果目前还有数据没有发送完成，则会选择继续发送，在这段时间内，服务端的状态为CLOSE_WAIT，发送完后服务端会发送FIN报文，随后等待客户端ACK报文，进入LASK_ACK状态。
 
-
-为什么会出现很多CLOSE_WAIT？如果程序中没有**手动关闭socket**，那么服务端并不会发出FIN，此时TCP连接需要被动地等到超时才能断开连接，此时持有的资源也不会释放。
-
+为什么会出现很多CLOSE_WAIT？如果被动关闭方没有**主动关闭socket**，那么服务端并不会发出FIN，此时TCP连接需要被动地等到超时才能断开连接，此时持有的资源也不会释放。
 
 过多会怎样？大量的资源（端口、内存等）被占用，导致新连接无法建立。
 
-
-怎么解决？编程时注意手动关闭socket。
-
+怎么解决？socket编程时注意手动关闭socket。一般网络框架会处理好此类问题。
 
 ## GET/POST异同？
 

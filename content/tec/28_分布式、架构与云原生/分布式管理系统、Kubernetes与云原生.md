@@ -154,7 +154,7 @@ Flanneld作为agent进程运行在每个主机上，它会为所在主机从集�
 
 ### hostPort
 
-hostPort模式中，pod会获得自己的pod ip，pod ip是根据docker网桥IPdo指端分配的一个ip地址。kubelet会通过配置路由表DNAT的方式将容器端口与宿主节点上的端口建立映射关系，这样用户就可以通过宿主机的ip、端口来访问pod。
+hostPort模式中，pod会获得自己的pod ip，pod ip是根据docker网桥IP指定分配的一个ip地址。kubelet会通过配置路由表DNAT的方式将容器端口与宿主节点上的端口建立映射关系，这样用户就可以通过宿主机的ip、端口来访问pod。
 
 可以通过`pod-ip:pod-port`或`host-ip:host-port`访问。
 
