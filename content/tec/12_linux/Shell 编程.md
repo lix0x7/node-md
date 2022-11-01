@@ -401,11 +401,7 @@ esac
 | n >> file | 将文件描述符为 n 的文件以追加的方式重定向到 file。 |  |  |
 | n >& m | 将输出文件 m 和 n 合并。 | command >> file 2>&1 | 将stdout和stderr合并后以追加写方式重定向到file |
 | n <& m | 将输入文件 m 和 n 合并。 |  |  |
-| << tag | 将开始标记 tag 和结束标记 tag 之间的内容作为输入。 | wc -l << EOF
- hello
- lix
- hello
- EOF | 将EOF中间的三行作为输入，输出结果为3。 |
+| << tag | 将开始标记 tag 和结束标记 tag 之间的内容作为输入。 | wc -l << EOF</br>hello lix</br>hello</br>EOF| 将EOF中间的三行作为输入，输出结果为3。 |
 
 
 
