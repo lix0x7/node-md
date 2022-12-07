@@ -165,7 +165,7 @@ func main() {
 
 - main包用来定义一个可独立执行的程序，main函数为程序入口
 
-- 测试文件文件名以Test为前缀，例如 TestAdd()
+- 测试文件文件名以`_test.go`为后缀，测试方法以Test为前缀，例如 TestAdd()
 
 - internal 包限制外部 import
 
