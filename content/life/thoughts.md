@@ -229,3 +229,24 @@ macOS 的优点：
 - 原生 md 文件支持内嵌 html 标签，使用第三方 markdown 工具很受限，例如插入视频、可执行代码块等场景
 
 自己维护的唯一问题在于图床需要自己维护
+
+## 数据备份思路
+
+windows
+- backup partition -> cos/backup/windows
+
+macos
+- source -- go utils --> cos/backup/macos, including:
+- 需备份文件
+  - .ssh
+  - .zshrc
+  - idea/goland settings
+  - vscode settings
+  - iterm profile
+  - better touch tool settings
+  - app二进制文件：因为有些app不易从网上下到，此处直接备份源文件
+    - SteelSeries ExactMouse Tool.app
+    - HyperSwitch
+	
+照片
+- windows机器存储photos全集：F/G盘主备，冷备至COS
