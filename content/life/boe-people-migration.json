@@ -1,0 +1,17 @@
+{
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "migrationErrs": [
+            "business_id: 609 , bid: people , entity_type: admin-department : json: cannot unmarshal string into Go struct field RetrievalConfig.number_of_replicas of type int",
+            "business_id: 609 , bid: people , entity_type: atsx-agency-bi : json: cannot unmarshal string into Go struct field ItemResultConf.build_item_result_conf.section_type of type int64",
+            "business_id: 609 , bid: people , entity_type: atsx-agency-candidate-report : json: cannot unmarshal array into Go struct field EntityDetailRankConfigView.rank_hit_similarity of type map[string]strategy_form.HitSimilarity",
+            "business_id: 609 , bid: people , entity_type: atsx-agency-pool : json: cannot unmarshal string into Go struct field ItemResultConf.build_item_result_conf.section_type of type int64",
+            "business_id: 609 , bid: people , entity_type: atsx-job-channel-publish : json: cannot unmarshal string into Go struct field ItemResultConf.build_item_result_conf.section_type of type int64",
+            "business_id: 609 , bid: people , entity_type: corehr-offboarding-info : json: cannot unmarshal string into Go struct field ItemResultConf.build_item_result_conf.section_type of type int64",
+            "business_id: 609 , bid: people , entity_type: people-master-data-cost-center : json: cannot unmarshal string into Go struct field RetrievalConfig.sort_script of type map[string]string",
+            "business_id: 609 , bid: people , entity_type: people-master-data-job-data : json: cannot unmarshal string into Go struct field ItemResultConf.build_item_result_conf.section_type of type int64",
+            "business_id: 609 , bid: people , entity_type: people-test-lidong : unsopported field property: \tkeyword"
+        ]
+    }
+}
