@@ -7,6 +7,18 @@ mkdir goexample && cd goexample
 go mod init github.com/lix7/goexample 
 ```
 
+引入依赖
+
+```
+go get github.com/pkg/errors
+```
+
+看别人的项目下载依赖
+
+```
+go mod download
+```
+
 for是唯一的循环语句
 
 ```go
