@@ -624,6 +624,15 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
          1.  createdTime - 毫秒级时间戳
          1.  updatedTime - 毫秒级时间戳
          1.  __Date - 整型日期，例如 `20200101`
+      6. 方法名
+         1. Parse__
+         1. Is__
+         1. As__
+         1. Get__
+         1. Load__
+         1. Create__
+         1. Upsert__
+         1. Delete__
 2.  RESTful API 规范与习惯
 2.  Project Layout / Readme Template
 2.  微服务构建
