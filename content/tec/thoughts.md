@@ -406,6 +406,14 @@ class Project{
 其核心要义在于，Logic 或者领域对象，一定可以独立于框架（Spring 等）存在，并且可以独立的进行测试。四层模型也是六边形架构的一种特例，可以看做只包含一个输出适配器（转换成 controller 可用的 VO）和一个输入适配器（转换成 dao 可用的 PO）的六边形架构。
 注意区分一个业务逻辑中的用例逻辑与领域对象逻辑，避免领域对象逻辑包含了太多的用例逻辑。
 
+对应测试三步法，业务逻辑处理也可以分为典型几步骤：
+1. validate: 校验入参，一般在controller里做
+2. load: 加载业务所需的所有数据
+3. process: 通过load的数据进行业务逻辑，过程中不再对外产生任何依赖，纯内存逻辑
+4. save: 更新process过程中变更过的数据
+
+上述情况比较理想化，但每一个业务代码块应该尽可能维持此类结构。
+
 不同与上述思想，使用函数式编程：通过数据管道操作同一个对象，此时需要保证每一个管道组成部分都可以独立运作并测试。
 
 ## 多源对象需要使用仓库（Repository）封装为领域对象
@@ -722,6 +730,8 @@ ref: [https://github.com/donnemartin/system-design-primer#how-to-approach-a-syst
 例如，project 表使用 `project_id` 作为主键，而非直接使用 `id` ，这样更清晰。相关讨论见 [StackOverFlow - Is it better to name the primary key column id or *_id?](https://stackoverflow.com/questions/6469730/is-it-better-to-name-the-primary-key-column-id-or-id)
 
 中间关联表的主键可以使用 `id`，因为该字段无实意。
+
+2023年回头再看，感觉直接用`id`更合适，带上表前缀反而太冗余了，试想是`project.Id`清晰还是`project.projectId`清晰？
 
 ## 代码分段与排版规范
 
