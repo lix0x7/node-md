@@ -862,8 +862,6 @@ try {
 <Property name="pattern.cls">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%X{env}][%X{service}][%X{traceId}][%-5level][%logger{3}][%X{userId}]-%notEmpty{[optionalField=%X{optional}]}%replace{%msg %rEx{36}}{[\r\n]+}{ }%ex{0}%n</Property>
 ```
 
-// todo - 可以实现一个工具去动态的添加日志的各个字段（必填、选填、默认）并生成解析用的正则表达式、MDC 工具类
-
 Ref: [最佳日志实践（v2.0）](https://zhuanlan.zhihu.com/p/27363484)
 
 ## 监控规范
