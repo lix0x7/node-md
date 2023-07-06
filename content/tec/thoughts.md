@@ -624,6 +624,55 @@ Visual comparison chart: http://i.imgur.com/k0t1e.png
 在MQ包含业务数据的设计中，消息乱序会导致数据先变为text_b，再变为text_a，这导致最终结果错误。
 但如果每次仅通过文档id反差文档内容，无论是否乱序，最终获得的都是text_a。
 
+## 命令模式的应用
+
+对于复杂的函数，可以使用builder和command模式构建，将其抽象为一个命令，填充默认参数并提供修改高级参数的接口。
+
+很典型的一个应用是 Elasticsearch 的 golang SDK。
+
+```go
+resp, err := client.PutMapping().Index(idx).BodyString(body).Do(ctx)
+```
+
+举一个简化的例子，当我们需要实现一个获取接口响应的方法时，正常情况下会如此实现：
+
+```java
+public String getFromUrl(string url, int timeoutMS) throw Exception {
+  // check url and timeoutMS
+  // http get
+  // return
+}
+```
+
+这里有几个可能的问题：1. 大部分人可能并不需要自己设定timeoutMS参数 2. 未来如果需要新增参数，则势必要修改函数签名，并且级联地修改所有调用方。可以改为命令模式。
+
+```java
+public class GetWebpageCmd {
+    private String url;
+    private int timeoutMS = 1000;
+
+    public String exec() throws IOException, InterruptedException {
+      // http get
+    }
+
+    public GetWebpageCmd setUrl(String url) {
+      // check url
+      this.url = url;
+      return this;
+    }
+
+    public GetWebpageCmd setTimeoutMS(int timeoutMS) {
+      // check timeoutMS
+      this.timeoutMS = timeoutMS;
+      return this;
+    }
+}
+
+// 使用时可以忽略timeoutMS，并且新增参数不需要调整存量调用
+new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
+```
+
+
 # 模板
 
 大部分模板应当使用 IDE 的模板功能、GitHub Gist、模板工程等方式维护，此处的模板只是索引。
