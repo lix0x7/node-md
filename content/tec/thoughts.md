@@ -1,4 +1,4 @@
-# 思维
+# 思想
 
 ## 没有银弹
 针对场景选用合适的工具。不仅仅是编程，也包括生活。例如架构、数据库选型、开发工具、语言库等等。
@@ -242,7 +242,7 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 
 ![](.thoughts.assets/2023-02-24-11-46-32.png)
 
-# 编码实践
+# 实践
 
 ## 开发阶段与 DevOps
 
@@ -672,6 +672,7 @@ public class GetWebpageCmd {
 new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 ```
 
+# 工程
 
 # 模板
 
