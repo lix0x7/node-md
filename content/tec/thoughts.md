@@ -676,6 +676,8 @@ public class GetWebpageCmd {
 new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 ```
 
+最后提醒一下，这个模式还是要按需使用，简单方法没必要封装成命令。
+
 # 工程
 
 # 模板
