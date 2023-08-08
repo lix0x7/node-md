@@ -694,6 +694,30 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 
 # 工程
 
+## go中的`%v`不适用内存类型的打印
+
+日志中打印数据时使用`%+v`即可，但是需要注意，指针类型需要显示打印，不然`%v`会打印内存地址，对于debug毫无帮助。
+
+## for loop的坑
+
+for loop中注意变量陷阱，循环中的变量地址不会变化，所以对其使用指针只会获得该循环变量指针，而非数组元素指针。
+
+```go
+items = []string{"a", "b"}
+
+// wrong: b, b
+for _, item := range items {
+  // use &item
+}
+
+// correct: a, b
+for _, item := range items {
+  item := item
+  // use &item
+}
+```
+
+
 # 模板
 
 大部分模板应当使用 IDE 的模板功能、GitHub Gist、模板工程等方式维护，此处的模板只是索引。
