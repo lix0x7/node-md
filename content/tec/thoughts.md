@@ -692,6 +692,12 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 
 最后提醒一下，这个模式还是要按需使用，简单方法没必要封装成命令。
 
+## 超长的缓存key优化
+
+可以通过md5或者sha1压缩超长缓存key。例如原始缓存key为`server:biz:20230202:userid12345678:projectid2345678:cachekey`可以md5压缩为`aea497d0fedc6df5f10c85501f60f499`。
+但需要注意哈希碰撞的问题，所以一般会将区分度大的字段（例如userid）摘取出来，不hash，将剩余部分进行hash。这样单一userid内缓存碰撞的可能性大大降低了。
+该例子中，可以将缓存key设计为 userId + hash(其他)，最终得到缓存key `userid12345678:aea497d0fedc6df5f10c85501f60f499`
+
 # 工程
 
 ## go中的`%v`不适用内存类型的打印
@@ -717,6 +723,11 @@ for _, item := range items {
 }
 ```
 
+## list、set、map 选用
+
+1. 没有顺序需求优先选set
+2. 有序选list
+3. 需要kv结构选map
 
 # 模板
 
