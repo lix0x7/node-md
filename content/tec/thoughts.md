@@ -729,6 +729,26 @@ for _, item := range items {
 2. 有序选list
 3. 需要kv结构选map
 
+## golang defer妙用
+
+在go中，可以使用defer作为方法调用的统一出口日志，例如
+
+```go
+func callAPI() (err error) {
+  resp := Response{}
+  defer func(){
+    logger.WithError(err).Info("done call API, resp: %+v", resp)
+  }()
+
+  resp, err := callRealAPI(&Request{})
+  if resp == nil || resp.GetStatusCode(){
+    err = fmt.Errorf("error resp: %+v", resp)
+  }
+
+  return
+}
+```
+
 # 模板
 
 大部分模板应当使用 IDE 的模板功能、GitHub Gist、模板工程等方式维护，此处的模板只是索引。
