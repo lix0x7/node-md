@@ -249,6 +249,11 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 编程的角度看，派生的体现是继承或组合，例如 user -> userVO / userDTO 这种派生可以基于user添加或移除字段，从而达到复用的目的；
 从数据的角度看，层次化的配置文件是一种数据派生的体现，例如spring中的 application-test <- application.yaml。
 
+## 代码是债务，而非资产
+
+越来越多的代码不会让产品走得更远，只会成为拖累产品迭代的债务。
+能增加代码的研发只能说是合格的研发，新增if-else并没有什么难度；能删除代码（偿还技术债务）的研发才是优秀的研发，证明你已经对一切熟稔于心，并且有相关的保障机制（e.g. 单测、集成测试等）确保移除代码不会引入问题。
+
 # 实践
 
 ## 开发阶段与 DevOps
@@ -570,6 +575,9 @@ ref: https://nodejs.org/api/url.html#url_url_strings_and_url_objects
 1. 一种抽象，多种实现
 2. 对外屏蔽内部复杂度，接口简单但实现复杂，例如Facade
 
+如果一个功能在短期内只有一种实现时，无需实现接口。待后续真的需要实现时，再迁移到接口上。
+起步阶段就实现繁多的接口会引入过多冗余代码，属于过早优化（设计）的范畴
+
 ## 常用延迟数值 Latency Number
 
 ```
@@ -702,7 +710,7 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 
 ## go中的`%v`不适用内存类型的打印
 
-日志中打印数据时使用`%+v`即可，但是需要注意，指针类型需要显示打印，不然`%v`会打印内存地址，对于debug毫无帮助。
+日志中打印数据时使用`%+v`即可，但是需要注意，指针类型需要显式打印，不然`%v`会打印内存地址，对于debug毫无帮助。
 
 ## for loop的坑
 
@@ -740,7 +748,7 @@ func callAPI() (err error) {
     logger.WithError(err).Info("done call API, resp: %+v", resp)
   }()
 
-  resp, err := callRealAPI(&Request{})
+  resp, err = callRealAPI(&Request{})
   if resp == nil || resp.GetStatusCode(){
     err = fmt.Errorf("error resp: %+v", resp)
   }
