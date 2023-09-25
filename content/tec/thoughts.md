@@ -502,7 +502,7 @@ MyBatis 以数据库表为核心，Java 对象只是承载数据的 POJO，一�
 - 联调和测试阶段要占用 0.5 的时间，虽然开发已经完成，但是需要排查问题、修改 bug
 
 需求流程：
-1. 理解需求 & 确认
+1. 需求评审 & 理解 & 确认
 1. 技术方案 & 安全评审 
 1. 开发 
 1. 自测 
@@ -756,6 +756,22 @@ func callAPI() (err error) {
   return
 }
 ```
+
+## 开发工具
+
+久经考验的：
+- bettertouchtool
+- snipaste
+- 坚果云
+- clippy - 剪贴板管理
+- 滴答清单
+- mermaid live editor
+
+待测试：
+- 全局snippets工具 espanso
+- 油猴脚本
+
+还在寻找的：
 
 # 模板
 
