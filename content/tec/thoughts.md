@@ -1079,6 +1079,25 @@ Ref: [SRE](./28_分布式、架构与云原生/SRE.md)
 
 ## 时间规范 ISO8601
 
+golang中可以使用time包内置的事件类型模板
+```golang
+const (
+	UnixDate    = "Mon Jan _2 15:04:05 MST 2006"
+	RubyDate    = "Mon Jan 02 15:04:05 -0700 2006"
+	RFC822      = "02 Jan 06 15:04 MST"
+	RFC822Z     = "02 Jan 06 15:04 -0700" // RFC822 with numeric zone
+	RFC850      = "Monday, 02-Jan-06 15:04:05 MST"
+	RFC1123     = "Mon, 02 Jan 2006 15:04:05 MST"
+	RFC1123Z    = "Mon, 02 Jan 2006 15:04:05 -0700" // RFC1123 with numeric zone
+	RFC3339     = "2006-01-02T15:04:05Z07:00"
+	RFC3339Nano = "2006-01-02T15:04:05.999999999Z07:00"
+)
+```
+
+## locale
+
+zh-CN是两种规范的组合，前半部分zh为语言编码ISO 639，后半部分为国家地区编码ISO 3166-1
+
 ## k8s 配置规范
 
 如下配置请额外注意，涉及到服务可用性
