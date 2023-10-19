@@ -260,6 +260,19 @@
 
 - 关注五年计划，了解国家大趋势，这些趋势会反应在相关的产业投入上，进一步反映到股市的相应版块上
 
+## 资产负债表、利润表、现金流量表
+
+当我们谈及企业财报时，其主体是三张表：资产负债表、利润表、现金流量表。
+
+资产负债表的核心等式为 `流动性资产 + 非流动性资产 = 股东权益 + 负债`，如果等式不成立，那一定是会计算错账了。资产负债表表达的是**某个时间点**企业所持有的资产和负债情况。其中，股东所占股本的决定了其话语权。
+参考[工商银行资产负债表](http://money.finance.sina.com.cn/corp/go.php/vFD_BalanceSheet/stockid/601398/ctrl/part/displaytype/4.phtml)
+
+利润表统计了企业在**一个统计周期**内的营业收入、支出与利润情况。
+参考[工商银行利润表](http://money.finance.sina.com.cn/corp/go.php/vFD_ProfitStatement/stockid/601398/ctrl/part/displaytype/4.phtml)
+
+现金流量表统计了**一个统计周期内**企业的现金和现金等价物的流入流出情况。企业实施的活动有三类经营、投资与筹资，现金流量表也从这三类分别统计现金流入流出情况。
+参考[工商银行现金流量表](https://money.finance.sina.com.cn/corp/go.php/vFD_CashFlow/stockid/601398/ctrl/part/displaytype/4.phtml)
+
 ## 二手交易思路
 
 - 产品要在仍有残值的生命周期内出手，例如手机可用、显卡性能没有落后主流等，残值太低的产品只能丢弃了，出二手收益不高，但很费精力
