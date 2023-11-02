@@ -1009,7 +1009,7 @@ public class MetaData {
 - 对于异常，一定要打印完整堆栈信息，如果需要包装异常，一定要打印 log 原始的错误
 - 配置加载前后一定要打印日志
 - 定时任务执行前后一定要打印日志
-- 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, resp: {}, cost: 123ms` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response`
+- 积累一套自己熟悉的关键词： `call` / `done call` / `request xxx, req: {}` / `done request xxx, resp: {}, cost: 123ms` / `error when xxx` / `using` / `metrics` / `audit` / `access` / `response` / `enable` / `disable` / `allow` / `deny`
 - access 日志维持特定格式，方便后期解析分析与统计。例如：统计近七天访问下游某服务的平均耗时与超时比例
 - 预留 API 动态调整日志级别
 - 对于 Java 框架中的日志，记得补充线程池调用缺少的 MDC 信息，log4j2 可以直接配置 `isThreadContextMapInheritable=true` 属性，例如：
