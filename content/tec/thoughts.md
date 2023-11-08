@@ -785,9 +785,9 @@ func callAPI() (err error) {
 }
 ```
 
-## 如无必要，传参、返回值、数组不用go指针
+## 在Golang中，如无必要，不用指针
 
-不要给自己找麻烦。
+不要给自己找麻烦。传参、返回值、数组里非必要时不用指针，不然check空指针、打印数据时都会有各种各样的麻烦。
 有些语义明确需要表示nil的情况还是要用指针的，例如sql中对应null时。
 
 ## 开发工具
@@ -799,12 +799,20 @@ func callAPI() (err error) {
 - clippy - 剪贴板管理
 - 滴答清单
 - mermaid live editor
+- 全局snippets工具 espanso
+- raycast 将log查询指令化
 
 待测试：
-- 全局snippets工具 espanso
 - 油猴脚本
 
 还在寻找的：
+
+
+## 排查go panic问题
+
+排查go panic问题时，可以在日志中查找`0x0`，也就空地址。
+基本上有`0x0`的地方就是触发空指针问题的源头。一般会出现在函数参数中。
+
 
 # 模板
 
