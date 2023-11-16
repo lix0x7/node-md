@@ -765,7 +765,7 @@ for _, item := range items {
 2. 有序选list
 3. 需要kv结构选map
 
-## golang defer妙用
+## golang 通用错误处理与defer妙用
 
 在go中，可以使用defer作为方法调用的统一出口日志，例如
 
@@ -777,10 +777,12 @@ func callAPI() (err error) {
   }()
 
   resp, err = callRealAPI(&Request{})
-  if resp == nil || resp.GetStatusCode(){
-    err = fmt.Errorf("error resp: %+v", resp)
+  if err != nil || resp == nil || resp.GetStatusCode() != 0 {
+    err = fmt.Errorf("error resp: %+v %w", resp, err)
+    return err
   }
 
+  // biz logic ...
   return
 }
 ```
