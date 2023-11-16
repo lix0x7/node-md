@@ -416,6 +416,7 @@ Pros:
   备忘录、相册都很好用
 - 摄像能力更好，但个人用的很少
 - 全链路HDR
+- 没有内置反诈...
 
 Cons:
 - 更大的内存，杀后台情况更少
@@ -453,28 +454,14 @@ macOS 的优点：
 - 数据安全
 - 原生 md 文件支持内嵌 html 标签，使用第三方 markdown 工具很受限，例如插入视频、可执行代码块等场景
 
-自己维护的唯一问题在于图床需要自己维护
+自己维护的唯一问题在于图床需要自己维护，或者使用repo内图片存储的方案
 
 ## 数据备份思路
 
-windows
-- backup partition -> cos/backup/windows
-
-macos
-- source -- go utils --> cos/backup/macos, including:
-- 需备份文件
-  - .ssh
-  - .zshrc
-  - idea/goland settings
-  - vscode settings
-  - iterm profile
-  - better touch tool settings
-  - app二进制文件：因为有些app不易从网上下到，此处直接备份源文件
-    - SteelSeries ExactMouse Tool.app
-    - HyperSwitch
-	
-照片
-- windows机器存储photos全集：F/G盘主备，冷备至COS
+- windows / macos
+  使用脚本整盘加密打包，然后冷备到cos
+- 照片
+  加密冷备至COS，只读
 
 ## 日常设备清理
 
@@ -482,3 +469,26 @@ macos
 - 进风设备容易积灰，形成灰尘层，需要定期清理一下，例如吸尘器防尘滤网、机箱风扇滤网等
 - 下水管道容易被头发丝堵，可以拆开后用小镊子夹出来，各种溶解剂不一定可以处理干净
 - 出水口容易被水路中的泥沙堵塞，需要定时清理滤网。水龙头、花洒等均属于此列
+
+
+
+# 商品选购备忘
+
+## 羽绒服
+
+主要维度：
+- 填充物：鹅绒 > 鸭绒 
+- 充绒量：> 200g
+- 充绒量：> 90%，
+- 蓬松度：> 850蓬
+- 面料
+
+## 显示器
+- 显示材料：IPS / VA / OLED
+- SDR最高亮度
+- HDR最高亮度
+- 色准
+- 尺寸
+- 支架设计与整体厚度
+- 边框：窄边框、下巴
+- KVM
