@@ -734,7 +734,13 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 但需要注意哈希碰撞的问题，所以一般会将区分度大的字段（例如userid）摘取出来，不hash，将剩余部分进行hash。这样单一userid内缓存碰撞的可能性大大降低了。
 该例子中，可以将缓存key设计为 userId + hash(其他)，最终得到缓存key `userid12345678:aea497d0fedc6df5f10c85501f60f499`
 
-# 工程
+## 写好技术方案
+
+- 技术方案的书写过程是梳理自己思路的过程，倒逼自己思考，一件事情如果写不出来，那一定是没想明白
+- 技术方案评审是一个构建共识的过程，是所有人达成一致的结论
+- 技术方案评审是一个集思广益的过程，发现问题、解决问题
+
+# Golang
 
 ## go中的`%v`不适用内存类型的打印
 
@@ -778,8 +784,7 @@ func callAPI() (err error) {
 
   resp, err = callRealAPI(&Request{})
   if err != nil || resp == nil || resp.GetStatusCode() != 0 {
-    err = fmt.Errorf("error resp: %+v %w", resp, err)
-    return err
+    return fmt.Errorf("error resp: %+v %w", resp, err)
   }
 
   // biz logic ...
@@ -821,6 +826,8 @@ func callAPI() (err error) {
 # 模板
 
 大部分模板应当使用 IDE 的模板功能、GitHub Gist、模板工程等方式维护，此处的模板只是索引。
+
+模版就是方法论的具象化。
 
 ## 要形成自己的开发方法论，思维模板
 形成自己的开发方法论，可以大幅度降低开发耗费的时间和精力。方法论应包括但不仅限于如下方面：
