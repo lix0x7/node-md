@@ -7,6 +7,10 @@
 
 不要只从一个角度看问题，这样会很局限。
 
+## 人类对图像的记忆强于自然语言
+
+学习语言时，看图背单词相比生硬地背更不容易忘记；输出代码架构图相比只看代码更不容易忘记
+
 ## 切面编程、命令式编程
 一般而言，很少有需要进行切面编程的。大多数的切面编程都是权限验证、错误处理、接口级别的缓存这种十分通用的操作，不要什么都尝试用切面编程解决，该抽象为方法的就老老实实抽象。尤其是使用 Express.js 这类切面编程友好的框架，就会不自觉地把切面编程当命令编程使用，最后代码结构混乱、不好维护。
 
@@ -741,6 +745,21 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 - 技术方案的书写过程是梳理自己思路的过程，倒逼自己思考，一件事情如果写不出来，那一定是没想明白
 - 技术方案评审是一个构建共识的过程，是所有人达成一致的结论
 - 技术方案评审是一个集思广益的过程，发现问题、解决问题
+
+## 降低嵌套层数
+
+降低代码中的if、for引入的嵌套层数，关键方法：
+- 复杂函数抽成独立的函数
+- 短路返回，退出逻辑前置，提前处理非happy path的逻辑
+
+## Elasticsearch是如何实现range查询的？
+
+ES依赖于lucene执行实际查询。其中的range查询分为两种：[TermRangeQuery](https://lucene.apache.org/core/8_11_2/core/index.html)和[PointRangeQuery](https://lucene.apache.org/core/8_11_2/core/org/apache/lucene/search/PointRangeQuery.html)，分别对应字符串range查询和数字类型range查询。下面简单描述下这两种range查询的执行过程。。
+
+TermRangeQuery，搜索倒排表中所有在该区间内的term，并使用这些term发起查询。对于数字类型，这个查询的开销远大于正确使用PointRangeQuery，而且在字典序、数字顺序不同的情况下会出错。
+实际生产场景中，很多在ES误配为keyword、text类型的时间戳在执行range查询时并不会出错，就是因为实际生活中时间戳不存在量级差异，也就没有字典序、数字序不匹配的问题，但在大索引上性能会大打折扣，小索引感知不强。
+
+PointRangeQuery，数字类型使用的range查询，其执行依赖于[PointValues](https://lucene.apache.org/core/8_11_2/core/org/apache/lucene/index/PointValues.html)这类存储数字类型的结构。它不适用传统倒排索引存储，而是使用区间树、KD树等结构。使用场景包括range查询、geo distance计算等。
 
 # Golang
 
