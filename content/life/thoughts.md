@@ -139,7 +139,7 @@ Beware, for I am fearless, therefore powerful.
 - Pros and Cons: 优缺点分析
 - Then，即1T，这样做之后会怎样
 
-## 分析法 方案选型
+## 分析法 方案选型、论文编排
 
 按照如下思路递进思考并发问，也可以用于答辩
 
@@ -171,6 +171,8 @@ Beware, for I am fearless, therefore powerful.
 - 事前
 - 事中
 - 事后
+
+## 分析法 金字塔原理：背景、冲突、疑问
 
 ## 会议事项
 
