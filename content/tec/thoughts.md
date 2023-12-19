@@ -752,6 +752,28 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 - 复杂函数抽成独立的函数
 - 短路返回，退出逻辑前置，提前处理非happy path的逻辑
 
+## list、set、map 选用
+
+1. 没有顺序需求优先选set，实际最常用。golang中是 `map[string]struct{}`，建议用封装库
+2. 有序选list
+3. 需要kv结构选map
+
+## 开发工具
+
+久经考验的：
+- bettertouchtool
+- snipaste
+- 坚果云
+- clippy - 剪贴板管理
+- 滴答清单
+- mermaid live editor
+- 全局snippets工具 espanso
+- raycast
+  - 将log查询指令化
+
+待测试：
+- 油猴脚本
+
 ## Elasticsearch是如何实现range查询的？
 
 ES依赖于lucene执行实际查询。其中的range查询分为两种：[TermRangeQuery](https://lucene.apache.org/core/8_11_2/core/index.html)和[PointRangeQuery](https://lucene.apache.org/core/8_11_2/core/org/apache/lucene/search/PointRangeQuery.html)，分别对应字符串range查询和数字类型range查询。下面简单描述下这两种range查询的执行过程。。
@@ -786,12 +808,6 @@ for _, item := range items {
 }
 ```
 
-## list、set、map 选用
-
-1. 没有顺序需求优先选set，实际最常用，golang中是 `map[string]struct{}`
-2. 有序选list
-3. 需要kv结构选map
-
 ## golang 通用错误处理与defer妙用
 
 在go中，可以使用defer作为方法调用的统一出口日志，例如
@@ -817,23 +833,6 @@ func callAPI() (err error) {
 
 不要给自己找麻烦。传参、返回值、数组里非必要时不用指针，不然check空指针、打印数据时都会有各种各样的麻烦，毕竟golang的相关工具方法没有Java那么发达，也没有好用的`Optional`。
 有些语义明确需要表示nil的情况还是要用指针的，例如sql中对应null时、业务上需要区分0和不存在时。
-
-## 开发工具
-
-久经考验的：
-- bettertouchtool
-- snipaste
-- 坚果云
-- ~~clippy - 剪贴板管理~~
-- 滴答清单
-- mermaid live editor
-- 全局snippets工具 espanso
-- raycast
-  - 将log查询指令化
-  - 剪贴板管理
-
-待测试：
-- 油猴脚本
 
 还在寻找的：
 
