@@ -285,6 +285,8 @@ DRY 的思想也不影响仅限于编码中：当代码的某个单一方面必�
 功能的配置应该简单易用，清晰明了，一句话能说清楚。不应设置复杂的前置条件和生效条件，不应和其他配置项耦合影响同一个功能。
 典型的配置：enable、disable、whitelist、blocklist、size...
 
+## Do not work hard, work smart
+
 # 实践
 
 ## 开发阶段与 DevOps
@@ -782,6 +784,11 @@ TermRangeQuery，搜索倒排表中所有在该区间内的term，并使用这�
 实际生产场景中，很多在ES误配为keyword、text类型的时间戳在执行range查询时并不会出错，就是因为实际生活中时间戳不存在量级差异，也就没有字典序、数字序不匹配的问题，但在大索引上性能会大打折扣，小索引感知不强。
 
 PointRangeQuery，数字类型使用的range查询，其执行依赖于[PointValues](https://lucene.apache.org/core/8_11_2/core/org/apache/lucene/index/PointValues.html)这类存储数字类型的结构。它不适用传统倒排索引存储，而是使用区间树、KD树等结构。使用场景包括range查询、geo distance计算等。
+
+## fail-fast
+
+在执行 IO 时，设置合理且尽可能小的超时时间以避免资源浪费。如果下游服务已经异常了，我们等待一秒和十秒不会对结果有任何影响，此时快速timeout会更好。因为等待十秒会让这个 HTTP 链接被占用十秒，无法释放，进一步引发雪崩，不如将其快速释放，环节当前服务压力。
+
 
 # Golang
 
