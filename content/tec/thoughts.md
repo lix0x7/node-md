@@ -776,7 +776,9 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 待测试：
 - 油猴脚本
 
-## Elasticsearch是如何实现range查询的？
+## ElasticSearch
+
+### Elasticsearch是如何实现range查询的？
 
 ES依赖于lucene执行实际查询。其中的range查询分为两种：[TermRangeQuery](https://lucene.apache.org/core/8_11_2/core/index.html)和[PointRangeQuery](https://lucene.apache.org/core/8_11_2/core/org/apache/lucene/search/PointRangeQuery.html)，分别对应字符串range查询和数字类型range查询。下面简单描述下这两种range查询的执行过程。。
 
@@ -784,6 +786,13 @@ TermRangeQuery，搜索倒排表中所有在该区间内的term，并使用这�
 实际生产场景中，很多在ES误配为keyword、text类型的时间戳在执行range查询时并不会出错，就是因为实际生活中时间戳不存在量级差异，也就没有字典序、数字序不匹配的问题，但在大索引上性能会大打折扣，小索引感知不强。
 
 PointRangeQuery，数字类型使用的range查询，其执行依赖于[PointValues](https://lucene.apache.org/core/8_11_2/core/org/apache/lucene/index/PointValues.html)这类存储数字类型的结构。它不适用传统倒排索引存储，而是使用区间树、KD树等结构。使用场景包括range查询、geo distance计算等。
+
+### should 子句的隐形逻辑
+
+bool查询中 `must: []` 必须所有条件都满足才找回，但should子句比较特殊。
+- 当bool查询不存在must子句时，should必须至少匹配一个；
+- 当bool查询中存在must子句时，should可以不匹配任何一个条件；
+- 当指定了minimum_should_match时，以该值为准
 
 ## fail-fast
 
