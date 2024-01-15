@@ -772,8 +772,6 @@ new SampleService.GetWebpageCmd().setUrl("https://www.baidu.com/").exec();
 - 全局snippets工具 espanso
 - raycast
   - 将log查询指令化
-
-待测试：
 - 油猴脚本
 
 ## ElasticSearch
